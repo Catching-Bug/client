@@ -1,0 +1,33 @@
+name: Client_CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_reqeust:
+    branches:
+      - main
+      - develop
+      - feature/*
+
+jobs:
+  build:
+    name: CI 실행
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run tests
+        run: yarn test
