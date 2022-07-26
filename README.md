@@ -8,7 +8,6 @@
   <br>근처의 멋진 사람이 해결해드릴지도?
   <br>
   <div>
-    ## used Stacks
     <div align="center">
       <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
       <img src="https://img.shields.io/badge/Next-000000?style=for-the-badge&logo=Next&logoColor=white">
@@ -16,7 +15,6 @@
       <br>
     </div>
   </div>
-    ## used Tools
     <div align="center">
       <img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=white">
       <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
