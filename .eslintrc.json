@@ -31,10 +31,10 @@
     "prefer-arrow-callback": "off",
     "no-var": "error",
     "no-dupe-keys": "error",
-    "react/prop-types": "off"
-    // "react/react-in-jsx-scope": 0
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": 0
+  },
+  "globals": {
+    "React": "writable"
   }
-  // "globals": {
-  //   "React": "writable"
-  // }
 }

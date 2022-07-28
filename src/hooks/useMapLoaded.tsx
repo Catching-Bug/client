@@ -25,5 +25,5 @@ export const useMapLoaded = (latitude: number, longitude: number) => {
     document.head.appendChild($script)
   }, [])
 
-  return { mapLoaded, onLoadKakaoMap }
+  return { mapLoaded, setMapLoaded, onLoadKakaoMap }
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useMapLoaded } from '../hooks/useMapLoaded'
+import { useMapLoaded } from '../../hooks/useMapLoaded'
 
 declare global {
   interface Window {
@@ -23,7 +23,7 @@ const Map = ({ latitude, longitude }: MapLocationProps) => {
 
   return (
     <>
-      <div className="MapContainer" id="map" />
+      <div className="MapContainer" id="map"></div>
       <style jsx>{`
         .MapContainer {
           width: 100%;
