@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { useMapLoaded } from '../../hooks/useMapLoaded'
+import { useMapLoaded } from '../../../hooks/useMapLoaded'
+import CenterMoveButton from '../centerMoveButton/centerMoveButton'
 
 declare global {
   interface Window {
@@ -23,11 +24,15 @@ const Map = ({ latitude, longitude }: MapLocationProps) => {
 
   return (
     <>
-      <div className="MapContainer" id="map"></div>
+      <div className="MapContainer" id="map">
+        <CenterMoveButton></CenterMoveButton>
+      </div>
+
       <style jsx>{`
         .MapContainer {
+          max-width: 1024px;
           width: 100%;
-          height: 360px;
+          height: 100%;
         }
       `}</style>
     </>

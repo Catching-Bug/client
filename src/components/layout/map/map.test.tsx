@@ -1,4 +1,4 @@
-import { useMapLoaded } from '../../hooks/useMapLoaded'
+import { useMapLoaded } from '../../../hooks/useMapLoaded'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 describe('should change mapLoaded', () => {
