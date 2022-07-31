@@ -8,13 +8,8 @@ declare global {
   }
 }
 
-interface MapLocationProps {
-  latitude: number
-  longitude: number
-}
-
-const Map = ({ latitude, longitude }: MapLocationProps) => {
-  const { mapLoaded, onLoadKakaoMap } = useMapLoaded(latitude, longitude)
+const Map = () => {
+  const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
 
   useEffect(() => {
     if (!mapLoaded) return

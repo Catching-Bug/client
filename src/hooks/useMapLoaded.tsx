@@ -1,14 +1,16 @@
-import Kakao from 'next-auth/providers/kakao'
 import { useEffect, useState } from 'react'
 
-export const useMapLoaded = (latitude: number, longitude: number) => {
+export const useMapLoaded = () => {
   const [mapLoaded, setMapLoaded] = useState<boolean>(false)
 
   const onLoadKakaoMap = () => {
     window.kakao.maps.load(() => {
       const container = document.getElementById('map')
       const options = {
-        center: new window.kakao.maps.LatLng(latitude, longitude),
+        center: new window.kakao.maps.LatLng(
+          37.56683096014424,
+          126.97865225689458,
+        ),
         level: 5,
       }
       const map = new window.kakao.maps.Map(container, options)

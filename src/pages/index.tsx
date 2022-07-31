@@ -8,7 +8,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Map latitude={37.56683096014424} longitude={126.97865225689458}></Map>
+      <Map></Map>
 
       <NavBar></NavBar>
       {/* {session ? (
