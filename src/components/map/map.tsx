@@ -6,14 +6,8 @@ declare global {
     kakao: any
   }
 }
-
-interface MapLocationProps {
-  latitude: number
-  longitude: number
-}
-
-const Map = ({ latitude, longitude }: MapLocationProps) => {
-  const { mapLoaded, onLoadKakaoMap } = useMapLoaded(latitude, longitude)
+const Map = () => {
+  const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
 
   useEffect(() => {
     if (!mapLoaded) return
@@ -23,7 +17,9 @@ const Map = ({ latitude, longitude }: MapLocationProps) => {
 
   return (
     <>
-      <div className="MapContainer" id="map"></div>
+      <div className="MapContainer" id="map">
+        kakaoMap
+      </div>
       <style jsx>{`
         .MapContainer {
           width: 100%;
