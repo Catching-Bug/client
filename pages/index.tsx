@@ -7,7 +7,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Map latitude={33.5563} longitude={126.79581}></Map>
+      <Map></Map>
       {session ? (
         <button onClick={() => signOut()}>로그아웃</button>
       ) : (
