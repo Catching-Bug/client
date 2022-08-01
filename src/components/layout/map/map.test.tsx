@@ -1,22 +1,12 @@
-import { useMapLoaded } from '../../../hooks/useMapLoaded'
-import { act, renderHook } from '@testing-library/react-hooks'
+import { render, screen } from '@testing-library/react'
+import Map from './map'
 
-describe('should change mapLoaded', () => {
-  const { result } = renderHook(() => useMapLoaded())
+describe('Map 렌더링 테스트', () => {
+  it('should render Map', () => {
+    render(<Map />)
 
-  test('before render kakaoMap', async () => {
-    expect(result.current.mapLoaded).toBe(false)
+    const map = screen.getByText('kakaoMap')
 
-    act(() => {
-      result.current.setMapLoaded(true)
-    })
-  })
-
-  test('after render kakaoMap', () => {
-    expect(result.current.mapLoaded).toBe(true)
-
-    const kakaoMap = document.querySelector('MapContainer')
-
-    expect(kakaoMap).toBeInTheDocument()
+    expect(map).toBeInTheDocument
   })
 })

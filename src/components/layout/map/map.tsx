@@ -20,6 +20,7 @@ const Map = () => {
   return (
     <>
       <div className="MapContainer" id="map">
+        kakaoMap
         <CenterMoveButton></CenterMoveButton>
       </div>
 
