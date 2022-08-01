@@ -6,18 +6,18 @@ const NavBar = () => {
     <>
       <nav className="navBarContainer">
         <div className="navBarItems">
-          <button className="ItemButton" type="button">
-            <Link href={'/main'}>
+          <Link href={'/main'}>
+            <button className="ItemButton" type="button">
               <Image src={`/home_icon.png`} width="30px" height="30px"></Image>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
         <div className="navBarItems">
-          <button className="ItemButton" type="button">
-            <Link href={'/'}>
+          <Link href={'/'}>
+            <button className="ItemButton" type="button">
               <Image src={`/map_icon.png`} width="30px" height="30px"></Image>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </nav>
 

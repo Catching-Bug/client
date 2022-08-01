@@ -11,15 +11,15 @@ const Home: NextPage = () => {
       <Map></Map>
 
       <NavBar></NavBar>
-      {/* {session ? (
-          <button onClick={() => signOut()} type="button">
-            로그아웃
-          </button>
-        ) : (
-          <button onClick={() => signIn('kakao')} type="button">
-            로그인
-          </button>
-        )} */}
+      {session ? (
+        <button onClick={() => signOut()} type="button">
+          로그아웃
+        </button>
+      ) : (
+        <button onClick={() => signIn('kakao')} type="button">
+          로그인
+        </button>
+      )}
     </>
   )
 }

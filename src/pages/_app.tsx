@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
-import { wrapper } from '../redux/store/makeStore'
+import { wrapper } from '../core/redux/store/makeStore'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
