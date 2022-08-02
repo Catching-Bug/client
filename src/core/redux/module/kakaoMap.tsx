@@ -4,7 +4,7 @@ interface initialType {
   map: any
 }
 
-const initialState: initialType = { map: undefined } // 초기 상태 정의
+const initialState: initialType = { map: {} } // 초기 상태 정의
 
 const kakaoMapSlice = createSlice({
   name: 'kakaoMap',
