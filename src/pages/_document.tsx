@@ -26,15 +26,6 @@ class MyDocument extends Document {
             content="벌레 잡기가 무서울 때 도움을 청해보자"
           />
           <link rel="icon" href="/favicon.ico" />
-          <script
-            defer
-            type="text/javascript"
-            src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_APP_KEY}&autoload=false&libraries=services`}
-          />
-          <script
-            defer
-            src="https://developers.kakao.com/sdk/js/kakao.min.js"
-          ></script>
         </Head>
         <body>
           <Main />
