@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import kakaoMap from './kakaoMap'
-import centerLatLon from './centerLatLon'
+import kakaoMapSlice from './kakaoMapSlice'
+import centerLatLonSlice from './centerLatLonSlice'
 
-const rootReducer = combineReducers({ kakaoMap, centerLatLon })
+const rootReducer = combineReducers({ kakaoMapSlice, centerLatLonSlice })
 
 export type RootState = ReturnType<typeof rootReducer>
 export default rootReducer

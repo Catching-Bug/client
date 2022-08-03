@@ -2,12 +2,6 @@ import { useEffect } from 'react'
 import { useMapLoaded } from '../../../hooks/useMapLoaded'
 import CenterMoveButton from '../centerMoveButton/centerMoveButton'
 
-declare global {
-  interface Window {
-    kakao: any
-  }
-}
-
 const Map = () => {
   const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
 
