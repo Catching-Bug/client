@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../core/redux/module/rootReducer'
 
 const CenterMoveButton = () => {
-  const { map } = useSelector((state: RootState) => state.kakaoMap)
+  const { map } = useSelector((state: RootState) => state.kakaoMapSlice)
   const { Latitude, Longitude } = useSelector(
-    (state: RootState) => state.centerLatLon,
+    (state: RootState) => state.centerLatLonSlice,
   )
 
   const handleMoveToCenter = () => {

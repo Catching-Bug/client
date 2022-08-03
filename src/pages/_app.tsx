@@ -1,16 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { SessionProvider } from 'next-auth/react'
 import { wrapper } from '../core/redux/store/makeStore'
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+declare global {
+  interface Window {
+    kakao: any
+  }
+}
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <SessionProvider session={session}>
-        <div className="middleContainer">
-          <Component {...pageProps} />
-        </div>
-      </SessionProvider>
+      <div className="middleContainer">
+        <Component {...pageProps} />
+      </div>
 
       <style jsx>{`
         .middleContainer {
