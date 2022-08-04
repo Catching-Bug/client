@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface initialType {
-  Latitude: number
-  Longitude: number
+  latitude: number
+  longitude: number
 }
 
 const initialState: initialType = {
-  Latitude: 37.56683096014424,
-  Longitude: 126.97865225689458,
+  latitude: 37.56683096014424,
+  longitude: 126.97865225689458,
 } // 초기 상태 정의
 
 const centerLatLonSlice = createSlice({
@@ -15,8 +15,8 @@ const centerLatLonSlice = createSlice({
   initialState,
   reducers: {
     saveLatLon: (state, action) => {
-      state.Latitude = action.payload.Latitude
-      state.Longitude = action.payload.Longitude
+      state.latitude = action.payload.latitude
+      state.longitude = action.payload.longitude
     },
   },
 })

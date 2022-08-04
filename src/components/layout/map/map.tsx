@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 import { useMapLoaded } from '../../../hooks/useMapLoaded'
-import { onLoadKakaoMap } from '../../utils/map/onLoadKakaoMap'
 import CenterMoveButton from '../centerMoveButton/centerMoveButton'
 
 const Map = () => {
-  const { mapLoaded } = useMapLoaded()
+  const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
 
   useEffect(() => {
     if (!mapLoaded) return
