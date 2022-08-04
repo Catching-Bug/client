@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface initialType {
   map: any
@@ -7,10 +7,10 @@ interface initialType {
 const initialState: initialType = { map: {} } // 초기 상태 정의
 
 const kakaoMapSlice = createSlice({
-  name: 'kakaoMap',
+  name: 'kakaoMapSlice',
   initialState,
   reducers: {
-    saveMapObject: (state, action) => {
+    saveMapObject(state, action: PayloadAction<object>) {
       state.map = action.payload
     },
   },
