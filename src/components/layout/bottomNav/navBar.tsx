@@ -35,6 +35,7 @@ const NavBar = () => {
           border-radius: 10px;
           background-color: white;
           box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
+          animation: fadeInUp 1s;
         }
 
         .navBarItems {
@@ -49,6 +50,17 @@ const NavBar = () => {
           border: none;
           background-color: white;
           cursor: pointer;
+        }
+
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+          }
+          to {
+            opacity: 1;
+            transform: translateZ(0);
+          }
         }
       `}</style>
     </>

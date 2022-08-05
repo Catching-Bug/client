@@ -1,9 +1,9 @@
-import centerLatLonSlice, { saveLatLon } from './centerLatLonSlice'
+import centerLatLon, { saveLatLon } from './centerLatLonSlice'
 
 describe('reducer', () => {
   describe('centerLatLon', () => {
     it('change Lat,Lon', () => {
-      const state = centerLatLonSlice(
+      const state = centerLatLon(
         {
           latitude: 0,
           longitude: 0,

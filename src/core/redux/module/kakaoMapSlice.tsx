@@ -7,7 +7,7 @@ interface initialType {
 const initialState: initialType = { map: {} } // 초기 상태 정의
 
 const kakaoMapSlice = createSlice({
-  name: 'kakaoMapSlice',
+  name: 'kakaoMap',
   initialState,
   reducers: {
     saveMapObject(state, action) {

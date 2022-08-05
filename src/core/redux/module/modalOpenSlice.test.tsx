@@ -1,9 +1,9 @@
-import modalOpenSlice, { saveModalOpen } from './modalOpenSlice'
+import modalOpen, { saveModalOpen } from './modalOpenSlice'
 
 describe('reducer', () => {
   describe('modalOpen', () => {
     it('change modalOpen', () => {
-      const state = modalOpenSlice(
+      const state = modalOpen(
         {
           modalOpen: false,
         },

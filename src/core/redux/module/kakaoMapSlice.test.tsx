@@ -1,9 +1,9 @@
-import kakaoMapSlice, { saveMapObject } from './kakaoMapSlice'
+import kakaoMap, { saveMapObject } from './kakaoMapSlice'
 
 describe('reducer', () => {
   describe('kakaoMap', () => {
     it('change map object', () => {
-      const state = kakaoMapSlice(
+      const state = kakaoMap(
         {
           map: '',
         },

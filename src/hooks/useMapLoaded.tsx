@@ -79,7 +79,7 @@ export const useMapLoaded = () => {
 
         marker.setPosition(latLng)
 
-        dispatch(saveModalOpen(true))
+        dispatch(saveModalOpen({ modalOpen: true }))
       },
     )
   }

@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
 import { useMapLoaded } from '../../../hooks/useMapLoaded'
 import CenterMoveButton from '../centerMoveButton/centerMoveButton'
-import Modal from '../modal/modal'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../core/redux/module/rootReducer'
+import ModalBottomSheet from '../modalBottomSheet/modalBottomSheet'
+import { saveModalOpen } from '../../../core/redux/module/modalOpenSlice'
 
 const Map = () => {
   const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
@@ -12,12 +15,19 @@ const Map = () => {
     onLoadKakaoMap()
   }, [mapLoaded])
 
+  const { modalOpen } = useSelector((state: RootState) => state.modalOpenSlice)
+  const dispatch = useDispatch()
+
+  const closeBottomSheet = () => {
+    dispatch(saveModalOpen({ modalOpen: false }))
+  }
+
   return (
     <>
       <div className="MapContainer" id="map">
         kakaoMap
-        <CenterMoveButton></CenterMoveButton>
-        <Modal></Modal>
+        <CenterMoveButton />
+        {modalOpen && <ModalBottomSheet closeBottomSheet={closeBottomSheet} />}
       </div>
 
       <style jsx>{`

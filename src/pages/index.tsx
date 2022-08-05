@@ -3,16 +3,18 @@ import Map from '../components/layout/map/map'
 import NavBar from '../components/layout/bottomNav/navBar'
 import { useState } from 'react'
 import Link from 'next/link'
+import { RootState } from '../core/redux/module/rootReducer'
+import { useSelector } from 'react-redux'
 
 const Home: NextPage = () => {
   const [loginStatus, setLoginStatus] = useState(false)
-
+  const { modalOpen } = useSelector((state: RootState) => state.modalOpenSlice)
   return (
     <>
       <Map></Map>
 
-      <NavBar></NavBar>
-      {loginStatus ? (
+      {!modalOpen && <NavBar />}
+      {/* {loginStatus ? (
         <button
           onClick={() => {
             setLoginStatus(!loginStatus)
@@ -25,7 +27,7 @@ const Home: NextPage = () => {
         <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN!}>
           <button type="button">로그인</button>
         </Link>
-      )}
+      )} */}
     </>
   )
 }
