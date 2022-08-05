@@ -23,7 +23,6 @@ const CenterMoveButton = () => {
         type="button"
         onClick={handleMoveToCenter}
       >
-        이동
         <Image width={40} height={40} src={'/current_location.png'}></Image>
       </button>
 

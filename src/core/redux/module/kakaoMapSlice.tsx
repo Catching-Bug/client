@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 interface initialType {
   map: any
@@ -10,7 +10,7 @@ const kakaoMapSlice = createSlice({
   name: 'kakaoMapSlice',
   initialState,
   reducers: {
-    saveMapObject(state, action: PayloadAction<object>) {
+    saveMapObject(state, action) {
       state.map = action.payload
     },
   },

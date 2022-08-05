@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useMapLoaded } from '../../../hooks/useMapLoaded'
 import CenterMoveButton from '../centerMoveButton/centerMoveButton'
+import Modal from '../modal/modal'
 
 const Map = () => {
   const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
@@ -16,6 +17,7 @@ const Map = () => {
       <div className="MapContainer" id="map">
         kakaoMap
         <CenterMoveButton></CenterMoveButton>
+        <Modal></Modal>
       </div>
 
       <style jsx>{`

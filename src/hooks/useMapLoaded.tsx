@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { saveLatLon } from '../core/redux/module/centerLatLonSlice'
 import { saveMapObject } from '../core/redux/module/kakaoMapSlice'
+import { saveModalOpen } from '../core/redux/module/modalOpenSlice'
 
 export const useMapLoaded = () => {
   const dispatch = useDispatch()
@@ -9,20 +10,29 @@ export const useMapLoaded = () => {
 
   const onLoadKakaoMap = () => {
     window.kakao.maps.load(() => {
-      const container = document.getElementById('map')
-      const options = {
-        center: new window.kakao.maps.LatLng(
-          37.56683096014424,
-          126.97865225689458,
-        ),
-        level: 5,
-      }
-      const map = new window.kakao.maps.Map(container, options)
+      const map = initMapObject()
 
+      // 센터 이동 버튼에 사용하기 위한 map 객체
       dispatch(saveMapObject(map))
 
       getCenterLocation(map)
+
+      getMarker(map)
     })
+  }
+
+  const initMapObject = () => {
+    const container = document.getElementById('map')
+    const options = {
+      center: new window.kakao.maps.LatLng(
+        37.56683096014424,
+        126.97865225689458,
+      ),
+      level: 5,
+    }
+    const map = new window.kakao.maps.Map(container, options)
+
+    return map
   }
 
   const getCenterLocation = (map: any) => {
@@ -34,10 +44,11 @@ export const useMapLoaded = () => {
 
         const locPosition = new window.kakao.maps.LatLng(lat, lon)
 
+        // 센터 이동 버튼에 사용하기 위한 lat, lon
         dispatch(
           saveLatLon({
-            Latitude: lat,
-            Longitude: lon,
+            latitude: lat,
+            longitude: lon,
           }),
         )
         map.setCenter(locPosition)
@@ -51,6 +62,26 @@ export const useMapLoaded = () => {
       )
       map.setCenter(locPosition)
     }
+  }
+
+  const getMarker = (map: any) => {
+    const marker = new window.kakao.maps.Marker({
+      position: map.getCenter(),
+    })
+
+    marker.setMap(map)
+
+    window.kakao.maps.event.addListener(
+      map,
+      'click',
+      function (mouseEvent: any) {
+        const latLng = mouseEvent.latLng
+
+        marker.setPosition(latLng)
+
+        dispatch(saveModalOpen(true))
+      },
+    )
   }
 
   useEffect(() => {

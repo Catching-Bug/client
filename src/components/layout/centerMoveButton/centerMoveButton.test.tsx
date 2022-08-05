@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { useSelector } from '../../../__mocks__/react-redux'
 import CenterMoveButton from './centerMoveButton'
 
@@ -8,7 +8,7 @@ describe('centerMoveButton', () => {
   useSelector.mockImplementation((selector) =>
     selector({
       kakaoMapSlice: {
-        map: 'm',
+        map: 'map mock',
       },
       centerLatLonSlice: {
         latitude: 33,
@@ -17,15 +17,9 @@ describe('centerMoveButton', () => {
     }),
   )
 
-  const handleMoveToCenter = jest.fn()
+  it('button render', () => {
+    const { container } = render(<CenterMoveButton />)
 
-  it('call handleMoveButton', () => {
-    const { container, getAllByText } = render(<CenterMoveButton />)
-
-    expect(container).toHaveTextContent
-
-    const button = getAllByText('이동')
-    fireEvent.click(button[0])
-    expect(handleMoveToCenter).toBeCalled()
+    expect(container).toBeInTheDocument
   })
 })
