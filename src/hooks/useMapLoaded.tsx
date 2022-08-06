@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { saveLatLon } from '../core/redux/module/centerLatLonSlice'
 import { saveMapObject } from '../core/redux/module/kakaoMapSlice'
+import { saveMarker } from '../core/redux/module/markerSlice'
 import { saveModalOpen } from '../core/redux/module/modalOpenSlice'
 
 export const useMapLoaded = () => {
@@ -10,18 +11,18 @@ export const useMapLoaded = () => {
 
   const onLoadKakaoMap = () => {
     window.kakao.maps.load(() => {
-      const map = initMapObject()
+      const { map, marker } = initObjectsForMap()
 
       // 센터 이동 버튼에 사용하기 위한 map 객체
       dispatch(saveMapObject(map))
 
       getCenterLocation(map)
 
-      getMarker(map)
+      getMarker(map, marker)
     })
   }
 
-  const initMapObject = () => {
+  const initObjectsForMap = () => {
     const container = document.getElementById('map')
     const options = {
       center: new window.kakao.maps.LatLng(
@@ -32,7 +33,11 @@ export const useMapLoaded = () => {
     }
     const map = new window.kakao.maps.Map(container, options)
 
-    return map
+    const marker = new window.kakao.maps.Marker({
+      position: map.getCenter(),
+    })
+
+    return { map, marker }
   }
 
   const getCenterLocation = (map: any) => {
@@ -64,24 +69,30 @@ export const useMapLoaded = () => {
     }
   }
 
-  const getMarker = (map: any) => {
-    const marker = new window.kakao.maps.Marker({
-      position: map.getCenter(),
-    })
-
-    marker.setMap(map)
-
+  const getMarker = (map: any, marker: any) => {
     window.kakao.maps.event.addListener(
       map,
       'click',
       function (mouseEvent: any) {
         const latLng = mouseEvent.latLng
-
+        marker.setMap(map)
         marker.setPosition(latLng)
 
+        dispatch(saveMarker({ marker: marker }))
+
         dispatch(saveModalOpen({ modalOpen: true }))
+
+        deleteMarker(marker)
       },
     )
+  }
+
+  const deleteMarker = (marker: any) => {
+    window.kakao.maps.event.addListener(marker, 'click', function () {
+      marker.setMap(null)
+
+      dispatch(saveModalOpen({ modalOpen: false }))
+    })
   }
 
   useEffect(() => {

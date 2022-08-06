@@ -15,11 +15,12 @@ const Map = () => {
     onLoadKakaoMap()
   }, [mapLoaded])
 
-  const { modalOpen } = useSelector((state: RootState) => state.modalOpenSlice)
   const dispatch = useDispatch()
+  const { marker } = useSelector((state: RootState) => state.markerSlice)
 
   const closeBottomSheet = () => {
     dispatch(saveModalOpen({ modalOpen: false }))
+    marker.setMap(null)
   }
 
   return (
@@ -27,7 +28,7 @@ const Map = () => {
       <div className="MapContainer" id="map">
         kakaoMap
         <CenterMoveButton />
-        {modalOpen && <ModalBottomSheet closeBottomSheet={closeBottomSheet} />}
+        <ModalBottomSheet closeBottomSheet={closeBottomSheet} />
       </div>
 
       <style jsx>{`

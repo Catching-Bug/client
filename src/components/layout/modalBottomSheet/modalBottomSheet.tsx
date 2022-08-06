@@ -1,15 +1,27 @@
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../core/redux/module/rootReducer'
+
 interface props {
   closeBottomSheet: () => void
 }
 
 const ModalBottomSheet = ({ closeBottomSheet }: props) => {
+  const { modalOpen } = useSelector((state: RootState) => state.modalOpenSlice)
+
   return (
     <>
-      <div className="bottomSheetContainer">
-        <button className="closeBtn" type="button" onClick={closeBottomSheet}>
-          X
-        </button>
-      </div>
+      {modalOpen && (
+        <div className="bottomSheetContainer">
+          <button
+            data-testid="closeBtn"
+            className="closeBtn"
+            type="button"
+            onClick={closeBottomSheet}
+          >
+            X
+          </button>
+        </div>
+      )}
 
       <style jsx>{`
         .bottomSheetContainer {

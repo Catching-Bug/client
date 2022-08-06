@@ -26,6 +26,10 @@ class MyDocument extends Document {
             content="벌레 잡기가 무서울 때 도움을 청해보자"
           />
           <link rel="icon" href="/favicon.ico" />
+          <script
+            defer
+            src="https://developers.kakao.com/sdk/js/kakao.min.js"
+          ></script>
           <title>캐치버그</title>
         </Head>
         <body>
