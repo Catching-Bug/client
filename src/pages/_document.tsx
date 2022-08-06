@@ -30,7 +30,6 @@ class MyDocument extends Document {
             defer
             src="https://developers.kakao.com/sdk/js/kakao.min.js"
           ></script>
-          <title>캐치버그</title>
         </Head>
         <body>
           <Main />
