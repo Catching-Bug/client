@@ -10,7 +10,7 @@ const kakaoMapSlice = createSlice({
   name: 'kakaoMap',
   initialState,
   reducers: {
-    saveMapObject: (state, action) => {
+    saveMapObject(state, action) {
       state.map = action.payload
     },
   },

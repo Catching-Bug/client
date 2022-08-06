@@ -4,14 +4,14 @@ import { RootState } from '../../../core/redux/module/rootReducer'
 
 const CenterMoveButton = () => {
   const { map } = useSelector((state: RootState) => state.kakaoMapSlice)
-  const { Latitude, Longitude } = useSelector(
+  const { latitude, longitude } = useSelector(
     (state: RootState) => state.centerLatLonSlice,
   )
 
   const handleMoveToCenter = () => {
     if (!map) return
 
-    const moveLatLon = new window.kakao.maps.LatLng(Latitude, Longitude)
+    const moveLatLon = new window.kakao.maps.LatLng(latitude, longitude)
 
     map.panTo(moveLatLon)
   }

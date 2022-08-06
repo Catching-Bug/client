@@ -5,17 +5,17 @@ describe('reducer', () => {
     it('change Lat,Lon', () => {
       const state = centerLatLon(
         {
-          Latitude: 0,
-          Longitude: 0,
+          latitude: 0,
+          longitude: 0,
         },
         saveLatLon({
-          Latitude: 37.56683096014424,
-          Longitude: 126.97865225689458,
+          latitude: 37.56683096014424,
+          longitude: 126.97865225689458,
         }),
       )
 
-      expect(state.Latitude).not.toBe(0)
-      expect(state.Latitude).not.toBe(0)
+      expect(state.latitude).not.toBe(0)
+      expect(state.longitude).not.toBe(0)
     })
   })
 })
