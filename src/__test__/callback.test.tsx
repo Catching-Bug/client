@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { useRouter } from 'next/router'
-import Callback from './callback'
+import Callback from '../pages/auth/callback'
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
