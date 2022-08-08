@@ -1,10 +1,31 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Loading from '../../components/layout/loading/loading'
+import { getAuthLogin } from '../../core/api/user'
+import MockAdapter from 'axios-mock-adapter'
+import { defaultAxios } from '../../core/api/instance/defaultInstance'
 
-const Callback: () => JSX.Element = () => {
+/**
+ * login request mock adapter
+ */
+if (typeof window !== 'undefined') {
+  const mock = new MockAdapter(defaultAxios)
+
+  mock.onGet('/api/login/oauth', { params: { code: 'code' } }).reply(200, {
+    accessToken: 'accessToken',
+    refreshToken: 'refreshToken',
+    gender: 'male',
+    nickName: 'nickname',
+  })
+}
+
+const Callback = () => {
   const router = useRouter()
 
+  /**
+   * url query param의 code를 가져옵니다.
+   * @returns authorizationCode kakao 인가코드를 반환
+   */
   const getAuthorizationCode = () => {
     const authorizationCode = new URL(window.location.href).searchParams.get(
       'code',
@@ -13,10 +34,24 @@ const Callback: () => JSX.Element = () => {
     return authorizationCode
   }
 
-  useEffect(() => {
-    getAuthorizationCode()
+  /**
+   * getAuthLogin을 이용해 로그인을 요청하는 함수
+   */
+  const loginRequest = () => {
+    const authCode = {
+      code: getAuthorizationCode(),
+    }
 
-    router.replace('/')
+    getAuthLogin(authCode).then((data) => {
+      localStorage.setItem('uat', data.accessToken)
+      localStorage.setItem('urt', data.refreshToken)
+
+      router.replace('/')
+    })
+  }
+
+  useEffect(() => {
+    loginRequest()
   }, [])
 
   return (

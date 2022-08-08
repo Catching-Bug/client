@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       <Map></Map>
 
       {!modalOpen && <NavBar />}
-      {/* {loginStatus ? (
+      {loginStatus ? (
         <button
           onClick={() => {
             setLoginStatus(!loginStatus)
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN!}>
           <button type="button">로그인</button>
         </Link>
-      )} */}
+      )}
     </>
   )
 }
