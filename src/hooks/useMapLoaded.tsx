@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { saveLatLon } from '../core/redux/module/centerLatLonSlice'
+import { getCenterLocation } from '../components/utils/map/getCenterLocation'
+import { getMarker } from '../components/utils/map/getMarker'
 import { saveMapObject } from '../core/redux/module/kakaoMapSlice'
-import { saveMarker } from '../core/redux/module/markerSlice'
-import { saveModalOpen } from '../core/redux/module/modalOpenSlice'
 
 /**
  * Custom Hook for map component
@@ -25,9 +24,9 @@ export const useMapLoaded = () => {
       // 센터 이동 버튼에 사용하기 위한 map 객체
       dispatch(saveMapObject(map))
 
-      getCenterLocation(map)
+      getCenterLocation(map, dispatch)
 
-      getMarker(map, marker)
+      // getMarker(map, marker, dispatch)
     })
   }
 
@@ -52,81 +51,6 @@ export const useMapLoaded = () => {
     })
 
     return { map, marker }
-  }
-
-  /**
-   * 나의 위치정보 권한을 얻어내어 지도를 내 위치로 이동시킵니다
-   * 만약 권한 거부 시, 서울 시청을 기준으로 갱신됩니다
-   * @param map 카카오맵 객체
-   */
-  const getCenterLocation = (map: any) => {
-    // 사용자의 위치를 정상적으로 받아오면 해당 위치가 중심좌표
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude,
-          lon = position.coords.longitude
-
-        const locPosition = new window.kakao.maps.LatLng(lat, lon)
-
-        // 내 위치 이동 버튼에 사용하기 위한 lat, lon 저장
-        dispatch(
-          saveLatLon({
-            latitude: lat,
-            longitude: lon,
-          }),
-        )
-
-        // 내 위치로 변경
-        map.setCenter(locPosition)
-      })
-    }
-    // 아니라면 서울 시청이 기본 중심좌표
-    else {
-      const locPosition = new window.kakao.maps.LatLng(
-        37.56683096014424,
-        126.97865225689458,
-      )
-      map.setCenter(locPosition)
-    }
-  }
-
-  /**
-   *
-   * @param map : 카카오맵 객체
-   * @param marker : 카카오맵 마커 객체
-   */
-  const getMarker = (map: any, marker: any) => {
-    window.kakao.maps.event.addListener(
-      map,
-      'click',
-      function (mouseEvent: any) {
-        const latLng = mouseEvent.latLng
-        marker.setMap(map)
-        marker.setPosition(latLng)
-
-        /**
-         * saveMarker 마커 객체를 저장
-         * saveModalOpen 마커 클릭시 bottomSheet 모달 true로 변경
-         */
-        dispatch(saveMarker({ marker: marker }))
-        dispatch(saveModalOpen({ modalOpen: true }))
-
-        deleteMarker(marker)
-      },
-    )
-  }
-
-  /**
-   * 이전에 찍었던 마커에 click 이벤트를 부여합니다
-   * 마커를 클릭 시 기존 마커가 삭제되며, bottomSheet Modal이 close 됩니다
-   * @param marker : 카카오맵 마커 객체
-   */
-  const deleteMarker = (marker: any) => {
-    window.kakao.maps.event.addListener(marker, 'click', function () {
-      marker.setMap(null)
-
-      dispatch(saveModalOpen({ modalOpen: false }))
-    })
   }
 
   /**

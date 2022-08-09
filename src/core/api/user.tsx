@@ -12,8 +12,8 @@ interface authType {
 }
 
 /**
- *
- * @returns data 로그인 요청한 데이터 값
+ * GET : kakao 인가 코드를 통해 로그인을 시도합니다.
+ * @returns data 로그인 요청한 데이터 JWT와 Email, Gender 반환
  */
 export const getAuthLogin = async (authCode: authType) => {
   try {
@@ -23,10 +23,14 @@ export const getAuthLogin = async (authCode: authType) => {
 
     return data
   } catch (error) {
-    alert('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
+    console.log('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
   }
 }
 
+/**
+ * POST : 리프레시 토큰을 재요청
+ * @returns data refresh token 반환
+ */
 export const postRefreshToken = async () => {
   try {
     if (typeof window !== undefined) {
@@ -39,6 +43,6 @@ export const postRefreshToken = async () => {
       return data
     }
   } catch (error) {
-    alert('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
+    console.log('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
   }
 }
