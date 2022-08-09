@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { postRefreshToken } from '../user'
 
 const SERVER_API_ENDPOINT = process.env.NEXT_PUBLIC_SERVER_API_ENDPOINT
 
@@ -22,3 +23,30 @@ const authInstance = () => {
 }
 
 export const authAxios = authInstance()
+
+authAxios.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  async (error) => {
+    const originalRequest = error.config
+
+    console.log('&& originReq => ', originalRequest)
+
+    if (!originalRequest._retry) {
+      console.log('rety 통과')
+      originalRequest._retry = true
+      const tokens = await postRefreshToken()
+      console.log('token 받아옴=>', tokens)
+
+      localStorage.setItem('uat', tokens.accessToken)
+      localStorage.setItem('urt', tokens.refreshToken)
+
+      authAxios.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${tokens.accessToken}`
+      return authAxios(originalRequest)
+    }
+    return Promise.reject(error)
+  },
+)
