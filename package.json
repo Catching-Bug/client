@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "devtest": "jest --watch"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
+    "axios": "^0.27.2",
     "next": "12.2.3",
     "next-redux-wrapper": "^7.0.5",
     "react": "18.2.0",
@@ -26,6 +28,7 @@
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
+    "axios-mock-adapter": "^1.21.1",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
     "eslint-config-prettier": "^8.5.0",

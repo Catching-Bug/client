@@ -8,6 +8,11 @@ const CenterMoveButton = () => {
     (state: RootState) => state.centerLatLonSlice,
   )
 
+  /**
+   * 내 위치 이동 버튼
+   * kakaomap에 사용되는 LatLng 객체 저장
+   * panTo는 자연스럽게 화면을 이동시킵니다.
+   */
   const handleMoveToCenter = () => {
     if (!map) return
 

@@ -1,3 +1,7 @@
+/**
+ * loading component
+ * @returns Element
+ */
 const Loading = () => {
   return (
     <>

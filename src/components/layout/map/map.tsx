@@ -9,6 +9,9 @@ import { saveModalOpen } from '../../../core/redux/module/modalOpenSlice'
 const Map = () => {
   const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
 
+  /**
+   * map script가 Load되었을 시 map을 그립니다.
+   */
   useEffect(() => {
     if (!mapLoaded) return
 
@@ -18,6 +21,11 @@ const Map = () => {
   const dispatch = useDispatch()
   const { marker } = useSelector((state: RootState) => state.markerSlice)
 
+  /**
+   * 해당 function은 bottomSheet에 사용됩니다.
+   * unit test를 위해 props를 넘기게 됩니다.
+   * bottomSheet를 끄고 찍혔던 마커를 지웁니다.
+   */
   const closeBottomSheet = () => {
     dispatch(saveModalOpen({ modalOpen: false }))
     marker.setMap(null)
