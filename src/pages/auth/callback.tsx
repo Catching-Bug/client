@@ -37,17 +37,22 @@ const Callback = () => {
   /**
    * getAuthLogin을 이용해 로그인을 요청하는 함수
    */
-  const loginRequest = () => {
-    const authCode = {
-      code: getAuthorizationCode(),
-    }
+  const loginRequest = async () => {
+    try {
+      const authCode = {
+        code: getAuthorizationCode(),
+      }
 
-    getAuthLogin(authCode).then((data) => {
-      localStorage.setItem('uat', data.accessToken)
-      localStorage.setItem('urt', data.refreshToken)
+      // const result = await getAuthLogin({ code: 'code' })
+      const result = await getAuthLogin(authCode)
+
+      localStorage.setItem('uat', result.accessToken)
+      localStorage.setItem('urt', result.refreshToken)
 
       router.replace('/')
-    })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
