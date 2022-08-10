@@ -42,7 +42,7 @@ export const useMapLoaded = () => {
         37.56683096014424,
         126.97865225689458,
       ),
-      level: 5,
+      level: 2,
     }
     const map = new window.kakao.maps.Map(container, options)
 

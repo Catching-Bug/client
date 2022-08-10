@@ -17,9 +17,7 @@ const ModalBottomSheet = ({ closeBottomSheet }: props) => {
             className="closeBtn"
             type="button"
             onClick={closeBottomSheet}
-          >
-            X
-          </button>
+          ></button>
         </div>
       )}
 
