@@ -31,7 +31,7 @@ const Callback = () => {
       'code',
     )
 
-    return authorizationCode
+    return { code: authorizationCode }
   }
 
   /**
@@ -39,9 +39,7 @@ const Callback = () => {
    */
   const loginRequest = async () => {
     try {
-      const authCode = {
-        code: getAuthorizationCode(),
-      }
+      const authCode = getAuthorizationCode()
 
       // const result = await getAuthLogin({ code: 'code' })
       const result = await getAuthLogin(authCode)
@@ -52,6 +50,7 @@ const Callback = () => {
       router.replace('/')
     } catch (error) {
       console.log(error)
+      router.replace('/')
     }
   }
 
