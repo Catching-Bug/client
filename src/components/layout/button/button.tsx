@@ -35,7 +35,9 @@ const Button = ({ className, onClick, children }: props) => {
 
         .loginButtonContainer {
           padding: 0;
-          border: 20px;
+          border-radius: 20px;
+          width: 183px;
+          height: 43px;
         }
 
         .creatingBtn {
@@ -49,6 +51,26 @@ const Button = ({ className, onClick, children }: props) => {
           border-radius: 5px;
           box-shadow: 0 3px 6px 0 rgb(0 0 0 /16%);
           cursor: pointer;
+        }
+
+        .prevButton {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background-color: rgba(255, 255, 255, 0);
+        }
+
+        .doneButton {
+          position: fixed;
+          bottom: 5px;
+          margin: 10px;
+          background-color: #5b6fd8;
+          border-radius: 20px;
+          width: 100%;
+          max-width: 300px;
+          height: 50px;
+          font-size: 1.5em;
+          color: white;
         }
 
         button {
