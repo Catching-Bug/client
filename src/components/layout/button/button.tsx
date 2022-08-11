@@ -54,23 +54,21 @@ const Button = ({ className, onClick, children }: props) => {
         }
 
         .prevButton {
-          position: absolute;
-          top: 10px;
-          left: 10px;
           background-color: rgba(255, 255, 255, 0);
         }
 
         .doneButton {
-          position: fixed;
-          bottom: 5px;
-          margin: 10px;
           background-color: #5b6fd8;
-          border-radius: 20px;
           width: 100%;
-          max-width: 300px;
           height: 50px;
+          min-height: 50px;
           font-size: 1.5em;
           color: white;
+        }
+
+        .locationChangeButton {
+          background-color: rgba(255, 255, 255, 0);
+          color: blue;
         }
 
         button {
