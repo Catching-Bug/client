@@ -1,18 +1,20 @@
-import { useEffect } from 'react'
-import { useMapLoaded } from '../../../hooks/useMapLoaded'
 import ModalBottomSheet from '../modalBottomSheet/modalBottomSheet'
 import Button from '../button/button'
 import Image from 'next/image'
+import { useEffect } from 'react'
+import { useMapActions } from '../../../hooks/useMapActions'
 import { useBottomSheet } from '../../../hooks/useBottomSheet'
 import { useCenterBtn } from '../../../hooks/useCenterBtn'
 import { useCreateBoard } from '../../../hooks/useCreateBoard'
+import { mapAction } from '../../utils/interface/mapActions'
 
-const Map = () => {
-  const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
-
+const Map = (props: mapAction) => {
   /**
    * map script가 Load되었을 시 map을 그립니다.
+   * props는 맵에 필요한 특정 기능을 활성화 할 수 있게 합니다.
    */
+  const { mapLoaded, onLoadKakaoMap } = useMapActions(props)
+
   useEffect(() => {
     if (!mapLoaded) return
 

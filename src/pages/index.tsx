@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const { modalOpen } = useSelector((state: RootState) => state.modalOpenSlice)
   return (
     <>
-      <Map></Map>
+      <Map showMyLocation></Map>
 
       {!modalOpen && <NavBar />}
     </>
