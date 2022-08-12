@@ -26,14 +26,15 @@ export const useMapActions = ({
    */
   const onLoadKakaoMap = () => {
     window.kakao.maps.load(() => {
-      const { map, marker } = initObjectsForMap()
+      const { map, marker, geocoder } = initObjectsForMap()
 
       // 센터 이동 버튼에 사용하기 위한 map 객체
       dispatch(saveMapObject(map))
 
       if (showMyLocation) getCenterLocation(map, dispatch)
 
-      if (enableToGetMarker) getMarker(map, marker, dispatch)
+      if (enableToGetMarker)
+        getMarker({ map, marker, geocoder, dispatch, address })
     })
   }
 
@@ -57,7 +58,9 @@ export const useMapActions = ({
       position: map.getCenter(),
     })
 
-    return { map, marker }
+    const geocoder = new window.kakao.maps.services.Geocoder()
+
+    return { map, marker, geocoder }
   }
 
   /**

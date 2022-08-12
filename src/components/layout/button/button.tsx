@@ -71,9 +71,14 @@ const Button = ({ className, onClick, children }: props) => {
           color: blue;
         }
 
+        .modalCloseBtn {
+          float: right;
+        }
+
         button {
           border: none;
           cursor: pointer;
+          background-color: rgb(0, 0, 0, 0);
         }
       `}</style>
     </>

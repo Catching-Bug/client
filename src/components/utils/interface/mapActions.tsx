@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 /**
  * map 컴포넌트의 각 기능에 대한 활성화 prop입니다.
  * showMyLocation : 내 위치 기반 표시하기
@@ -12,4 +14,5 @@ export interface mapAction {
   address?: boolean
   getAroundUserBoard?: boolean
   markerOnClick?: () => void
+  children?: ReactNode
 }

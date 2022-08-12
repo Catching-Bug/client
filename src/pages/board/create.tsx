@@ -1,16 +1,22 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Button from '../../components/layout/button/button'
+import Map from '../../components/layout/map/map'
+import Modal from '../../components/layout/modal/modal'
+import { useModal } from '../../hooks/useModal'
 
 const Create = () => {
   const router = useRouter()
+
+  const { modalOpen, toggleModalOpenStatus } = useModal()
 
   const requestBoardToServer = () => {}
 
   return (
     <>
       <div className="boardContainer">
-        <div className="headerBar">
+        {/* 헤더 */}
+        <header className="headerBar">
           <Button
             className="prevButton"
             onClick={() => {
@@ -25,10 +31,13 @@ const Create = () => {
             ></Image>
           </Button>
           <h1>🐞도움청하기</h1>
-          <Button className={'locationChangeButton'} onClick={() => {}}>
+          <Button
+            className={'locationChangeButton'}
+            onClick={toggleModalOpenStatus}
+          >
             내 위치 변경
           </Button>
-        </div>
+        </header>
 
         <div className="inputContainer">
           <label>이 곳이 현재 계신 곳이 맞으신가요?</label>
@@ -57,6 +66,27 @@ const Create = () => {
           완료
         </Button>
       </div>
+
+      <Modal
+        modalOpen={modalOpen}
+        toggleModalOpenStatus={toggleModalOpenStatus}
+      >
+        <div className="modalContainer">
+          <header className="modalHeaderBar">
+            <h1>위치 선택하기</h1>
+            <Button className="modalCloseBtn" onClick={toggleModalOpenStatus}>
+              <Image
+                src={'/previous_btn.png'}
+                width={40}
+                height={40}
+                alt={'모달 닫기'}
+              ></Image>
+            </Button>
+          </header>
+          <Map showMyLocation enableToGetMarker address></Map>
+          <div className="addressContainer"></div>
+        </div>
+      </Modal>
 
       <style jsx>{`
         .boardContainer {
@@ -116,6 +146,30 @@ const Create = () => {
           font-size: 1.3em;
           padding-left: 5px;
           margin: 20px 0;
+        }
+
+        .modalContainer {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 640px;
+          height: 100%;
+          max-height: 700px;
+        }
+
+        .modalHeaderBar {
+          width: 100%;
+          height: 50px;
+          padding: 0 10px;
+          background-color: white;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .addressContainer {
+          width: 100%;
+          height: 200px;
+          background-color: white;
         }
       `}</style>
     </>

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { useSelector } from '../../../__mocks__/react-redux'
-import ModalBottomSheet from './modalBottomSheet'
+import ModalBottomSheet from './bottomSheet'
 
 jest.mock('react-redux')
 
