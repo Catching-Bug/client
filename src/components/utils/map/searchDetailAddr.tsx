@@ -21,7 +21,13 @@ export const searchDetailAddr = ({
           ? result[0].road_address.address_name
           : null
 
-        dispatch(saveLocation({ location: detailLocation }))
+        dispatch(
+          saveLocation({
+            location: detailLocation,
+            latitude: mouseEventLatLng.Ma,
+            longitude: mouseEventLatLng.La,
+          }),
+        )
       }
     },
   )

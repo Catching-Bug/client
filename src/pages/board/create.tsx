@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import MockAdapter from 'axios-mock-adapter'
 import Image from 'next/image'
 
 import { RootState } from '../../core/redux/module/rootReducer'
@@ -9,16 +8,20 @@ import { useModal } from '../../hooks/useModal'
 import Button from '../../components/layout/button/button'
 import Map from '../../components/layout/map/map'
 import Modal from '../../components/layout/modal/modal'
-import { getAllLocations } from '../../core/api/location'
+
+import MockAdapter from 'axios-mock-adapter'
 import { authAxios } from '../../core/api/instance/authInstance'
+import { defaultAxios } from '../../core/api/instance/defaultInstance'
+import { useLocation } from '../../hooks/useLocation'
 
 /**
- * login request mock adapter
+ * 위치 관련 요청에 대한 mock adapter
  */
 if (typeof window !== 'undefined') {
-  const mock = new MockAdapter(authAxios)
+  const authMock = new MockAdapter(authAxios)
+  const defaultMock = new MockAdapter(defaultAxios)
 
-  mock.onGet('/api/locations').reply(200, [
+  authMock.onGet('/api/locations').reply(200, [
     {
       id: 0,
       latitude: 33,
@@ -29,68 +32,27 @@ if (typeof window !== 'undefined') {
       detailLocation: '서울아파트 103호',
     },
   ])
-}
 
-// interface locationTypes {
-//   latitude: number
-//   longitude: number
-//   region: string
-//   city: string
-//   town: string
-//   detailLocation: string
-// }
+  authMock.onPost('/api/locations').reply(200, { id: 1 })
+
+  defaultMock
+    .onPost('/api/token/refresh')
+    .reply(200, { refreshToken: 'new refresh', accessToken: 'new access' })
+}
 
 const Create = () => {
   const router = useRouter()
 
-  const { modalOpen, toggleModalOpenStatus } = useModal()
-
   const requestBoardToServer = () => {}
 
-  const [myLocations, setMyLocations] = useState<object[]>([])
+  const { modalOpen, toggleModalOpenStatus } = useModal()
 
-  const handleSetlocation = () => {
-    // 서버에 내가 정한 위치 보내고
-    // 서버한테 받고 나머지 저장
-    let [region, city, town, ...detailLocation] = location.split(' ')
-
-    setMyLocations([
-      ...myLocations,
-      {
-        id: 1,
-        latitude: latitude,
-        longitude: longitude,
-        region: region,
-        city: city,
-        town: town,
-        detailLocation: detailLocation,
-      },
-    ])
-
-    toggleModalOpenStatus()
-  }
-
-  useEffect(() => {
-    console.log(myLocations)
-  }, [myLocations])
-  const detailInputRef = useRef(null)
-  const { location, latitude, longitude } = useSelector(
-    (state: RootState) => state.locationSlice,
+  const detailInputRef = useRef<any>()
+  const { location } = useSelector((state: RootState) => state.locationSlice)
+  const { myLocations, handleSetlocation } = useLocation(
+    detailInputRef,
+    toggleModalOpenStatus,
   )
-
-  useEffect(() => {
-    const fetchAllLocations = async () => {
-      try {
-        const result = await getAllLocations()
-
-        setMyLocations(result)
-      } catch (error) {
-        console.log('에러가 발생했습니다. 관리자에게 문의해주세요.')
-      }
-    }
-
-    fetchAllLocations()
-  }, [])
 
   return (
     <>
