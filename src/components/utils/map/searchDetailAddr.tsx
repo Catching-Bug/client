@@ -1,22 +1,27 @@
+import { Dispatch } from 'react'
+import { saveLocation } from '../../../core/redux/module/locationSlice'
+
 interface addressPropsType {
   mouseEventLatLng: any
   geocoder: any
+  dispatch: Dispatch<any>
 }
 
 export const searchDetailAddr = ({
   mouseEventLatLng,
   geocoder,
+  dispatch,
 }: addressPropsType) => {
   searchDetailAddrFromCoords(
     mouseEventLatLng,
     geocoder,
     function (result: any, status: any) {
       if (status === window.kakao.maps.services.Status.OK) {
-        const detailAddr = !!result[0].road_address
+        const detailLocation = !!result[0].road_address
           ? result[0].road_address.address_name
           : null
 
-        console.log(detailAddr)
+        dispatch(saveLocation({ location: detailLocation }))
       }
     },
   )

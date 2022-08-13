@@ -6,7 +6,7 @@ import { getMarker } from '../components/utils/map/getMarker'
 import { saveMapObject } from '../core/redux/module/kakaoMapSlice'
 
 /**
- * Custom Hook for map component
+ * 맵에 사용되는 각종 action 기능이 모여있습니다.
  */
 export const useMapActions = ({
   showMyLocation,

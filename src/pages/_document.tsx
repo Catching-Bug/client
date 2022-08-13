@@ -16,7 +16,6 @@ class MyDocument extends Document {
       <Html lang="ko">
         <Head>
           <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta property="og:image" content="/home_icon.png" />
           <meta property="og:title" content="캐치버그" />
           <meta

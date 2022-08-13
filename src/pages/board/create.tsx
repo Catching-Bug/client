@@ -1,9 +1,44 @@
-import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import MockAdapter from 'axios-mock-adapter'
+import Image from 'next/image'
+
+import { RootState } from '../../core/redux/module/rootReducer'
+import { useModal } from '../../hooks/useModal'
 import Button from '../../components/layout/button/button'
 import Map from '../../components/layout/map/map'
 import Modal from '../../components/layout/modal/modal'
-import { useModal } from '../../hooks/useModal'
+import { getAllLocations } from '../../core/api/location'
+import { authAxios } from '../../core/api/instance/authInstance'
+
+/**
+ * login request mock adapter
+ */
+if (typeof window !== 'undefined') {
+  const mock = new MockAdapter(authAxios)
+
+  mock.onGet('/api/locations').reply(200, [
+    {
+      id: 0,
+      latitude: 33,
+      longitude: 125,
+      region: '서울특별시',
+      city: '서울구',
+      town: '서울동',
+      detailLocation: '서울아파트 103호',
+    },
+  ])
+}
+
+// interface locationTypes {
+//   latitude: number
+//   longitude: number
+//   region: string
+//   city: string
+//   town: string
+//   detailLocation: string
+// }
 
 const Create = () => {
   const router = useRouter()
@@ -11,6 +46,51 @@ const Create = () => {
   const { modalOpen, toggleModalOpenStatus } = useModal()
 
   const requestBoardToServer = () => {}
+
+  const [myLocations, setMyLocations] = useState<object[]>([])
+
+  const handleSetlocation = () => {
+    // 서버에 내가 정한 위치 보내고
+    // 서버한테 받고 나머지 저장
+    let [region, city, town, ...detailLocation] = location.split(' ')
+
+    setMyLocations([
+      ...myLocations,
+      {
+        id: 1,
+        latitude: latitude,
+        longitude: longitude,
+        region: region,
+        city: city,
+        town: town,
+        detailLocation: detailLocation,
+      },
+    ])
+
+    toggleModalOpenStatus()
+  }
+
+  useEffect(() => {
+    console.log(myLocations)
+  }, [myLocations])
+  const detailInputRef = useRef(null)
+  const { location, latitude, longitude } = useSelector(
+    (state: RootState) => state.locationSlice,
+  )
+
+  useEffect(() => {
+    const fetchAllLocations = async () => {
+      try {
+        const result = await getAllLocations()
+
+        setMyLocations(result)
+      } catch (error) {
+        console.log('에러가 발생했습니다. 관리자에게 문의해주세요.')
+      }
+    }
+
+    fetchAllLocations()
+  }, [])
 
   return (
     <>
@@ -84,7 +164,26 @@ const Create = () => {
             </Button>
           </header>
           <Map showMyLocation enableToGetMarker address></Map>
-          <div className="addressContainer"></div>
+          <div className="locationContainer">
+            <label htmlFor="location">원 주소</label>
+            <input
+              className="locationInput"
+              id="location"
+              disabled
+              placeholder={
+                location ? location : '잘못된 위치이거나 없는 주소입니다.'
+              }
+            ></input>
+            <label htmlFor="detail">상세 주소를 입력해주세요.</label>
+            <input
+              className="locationInput"
+              id="detail"
+              ref={detailInputRef}
+            ></input>
+            <Button className="doneButton" onClick={handleSetlocation}>
+              선택 완료
+            </Button>
+          </div>
         </div>
       </Modal>
 
@@ -116,14 +215,6 @@ const Create = () => {
           display: flex;
           flex-direction: column;
           margin: 20px 0;
-        }
-
-        h1 {
-          font-size: 1.5em;
-        }
-
-        label {
-          color: gray;
         }
 
         .inputBox {
@@ -166,10 +257,30 @@ const Create = () => {
           justify-content: space-between;
         }
 
-        .addressContainer {
+        .locationContainer {
           width: 100%;
-          height: 200px;
+          height: 300px;
           background-color: white;
+          padding: 6px 11px 0 11px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .locationInput {
+          height: 30px;
+          margin: 10px 0;
+        }
+
+        h1 {
+          font-size: 1.5em;
+        }
+
+        label {
+          color: gray;
+        }
+
+        p {
+          margin: 0.3em 0;
         }
       `}</style>
     </>

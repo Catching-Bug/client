@@ -1,10 +1,11 @@
 import { saveMarker } from '../../../core/redux/module/markerSlice'
 import { searchDetailAddr } from './searchDetailAddr'
+import { Dispatch } from 'react'
 
 interface markerPropsType {
   map: any
   marker: any
-  dispatch: any
+  dispatch: Dispatch<any>
   geocoder: any
   address?: boolean
 }
@@ -32,7 +33,7 @@ export const getMarker = ({
     dispatch(saveMarker({ marker: marker }))
 
     if (address) {
-      searchDetailAddr({ mouseEventLatLng: latLng, geocoder })
+      searchDetailAddr({ mouseEventLatLng: latLng, geocoder, dispatch })
     }
   })
 }

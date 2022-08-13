@@ -6,6 +6,10 @@ import { useState } from 'react'
 export const useModal = () => {
   const [modalOpen, setModalOpen] = useState(false)
 
+  /**
+   * modal의 상태를 뒤바꿉니다
+   * ex) true -> false , false -> true
+   */
   const toggleModalOpenStatus = () => {
     setModalOpen(!modalOpen)
   }
