@@ -7,9 +7,9 @@ import Button from '../components/layout/button/button'
 const Main = () => {
   const [loginStatus, setLoginStatus] = useState(false)
 
-  const changeLoginStatus = () => {
-    setLoginStatus(!loginStatus)
-  }
+  // const changeLoginStatus = () => {
+  //   setLoginStatus(!loginStatus)
+  // }
 
   return (
     <>
@@ -27,16 +27,16 @@ const Main = () => {
         </h1>
         <h2>벌레를 대신 잡아줄 사람이 필요하세요?</h2>
         {loginStatus ? null : (
-          <Button className="loginButtonContainer">
-            <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN!}>
+          <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN!}>
+            <Button className="loginButtonContainer">
               <Image
                 src={'/kakao_login_medium_narrow.png'}
                 width={183}
                 height={45}
                 alt={'로그인'}
               ></Image>
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         )}
       </div>
       <NavBar></NavBar>

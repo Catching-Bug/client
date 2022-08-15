@@ -35,7 +35,9 @@ const Button = ({ className, onClick, children }: props) => {
 
         .loginButtonContainer {
           padding: 0;
-          border: 20px;
+          border-radius: 20px;
+          width: 183px;
+          height: 43px;
         }
 
         .creatingBtn {
@@ -51,9 +53,32 @@ const Button = ({ className, onClick, children }: props) => {
           cursor: pointer;
         }
 
+        .prevButton {
+          background-color: rgba(255, 255, 255, 0);
+        }
+
+        .doneButton {
+          background-color: #5b6fd8;
+          width: 100%;
+          height: 50px;
+          min-height: 50px;
+          font-size: 1.5em;
+          color: white;
+        }
+
+        .locationChangeButton {
+          background-color: rgba(255, 255, 255, 0);
+          color: blue;
+        }
+
+        .modalCloseBtn {
+          float: right;
+        }
+
         button {
           border: none;
           cursor: pointer;
+          background-color: rgb(0, 0, 0, 0);
         }
       `}</style>
     </>

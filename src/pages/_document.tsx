@@ -15,6 +15,7 @@ class MyDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
+          <meta charSet="utf-8" />
           <meta property="og:image" content="/home_icon.png" />
           <meta property="og:title" content="캐치버그" />
           <meta

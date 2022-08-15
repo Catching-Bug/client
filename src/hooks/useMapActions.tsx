@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { mapAction } from '../components/utils/interface/mapActions'
 import { getCenterLocation } from '../components/utils/map/getCenterLocation'
 import { getMarker } from '../components/utils/map/getMarker'
 import { saveMapObject } from '../core/redux/module/kakaoMapSlice'
 
 /**
- * Custom Hook for map component
+ * 맵에 사용되는 각종 action 기능이 모여있습니다.
  */
-export const useMapLoaded = () => {
+export const useMapActions = ({
+  showMyLocation,
+  enableToGetMarker,
+  address,
+  getAroundUserBoard,
+  markerOnClick,
+}: mapAction) => {
   const dispatch = useDispatch()
 
   // 스크립트가 Load 되었는지를 판단하는 state
@@ -19,14 +26,15 @@ export const useMapLoaded = () => {
    */
   const onLoadKakaoMap = () => {
     window.kakao.maps.load(() => {
-      const { map, marker } = initObjectsForMap()
+      const { map, marker, geocoder } = initObjectsForMap()
 
       // 센터 이동 버튼에 사용하기 위한 map 객체
       dispatch(saveMapObject(map))
 
-      getCenterLocation(map, dispatch)
+      if (showMyLocation) getCenterLocation(map, dispatch)
 
-      // getMarker(map, marker, dispatch)
+      if (enableToGetMarker)
+        getMarker({ map, marker, geocoder, dispatch, address })
     })
   }
 
@@ -50,7 +58,9 @@ export const useMapLoaded = () => {
       position: map.getCenter(),
     })
 
-    return { map, marker }
+    const geocoder = new window.kakao.maps.services.Geocoder()
+
+    return { map, marker, geocoder }
   }
 
   /**

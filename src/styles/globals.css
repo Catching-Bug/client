@@ -3,7 +3,6 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  font-family: 'twayair';
 }
 
 a {
@@ -13,6 +12,7 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'twayair';
 }
 
 @media (prefers-color-scheme: dark) {
