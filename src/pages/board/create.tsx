@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -13,6 +13,7 @@ import MockAdapter from 'axios-mock-adapter'
 import { authAxios } from '../../core/api/instance/authInstance'
 import { defaultAxios } from '../../core/api/instance/defaultInstance'
 import { useLocation } from '../../hooks/useLocation'
+import { postCreateBoard } from '../../core/api/board'
 
 /**
  * 위치 관련 요청에 대한 mock adapter
@@ -21,6 +22,9 @@ if (typeof window !== 'undefined') {
   const authMock = new MockAdapter(authAxios)
   const defaultMock = new MockAdapter(defaultAxios)
 
+  /**
+   * 사용자 위치 전부 조회
+   */
   authMock.onGet('/api/locations').reply(200, [
     {
       id: 0,
@@ -33,8 +37,16 @@ if (typeof window !== 'undefined') {
     },
   ])
 
+  /**
+   * 사용자 위치 등록
+   */
   authMock.onPost('/api/locations').reply(200, { id: 1 })
 
+  authMock.onPost('/api/board').reply(200, { id: 2 })
+
+  /**
+   * 리프레시 토큰 intercept 요청
+   */
   defaultMock
     .onPost('/api/token/refresh')
     .reply(200, { refreshToken: 'new refresh', accessToken: 'new access' })
@@ -43,10 +55,69 @@ if (typeof window !== 'undefined') {
 const Create = () => {
   const router = useRouter()
 
-  const requestBoardToServer = () => {}
+  /**
+   * select 태그에서 내가 선택한 option에 대한 index 값 저장
+   */
+  const [selectedLocationIndex, setSelectedLocationIndex] = useState<number>(0)
+  const handleChangeSelectedOption = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedLocationIndex(Number(e.target.value))
+  }
 
+  /**
+   * 게시판 글 생성을 위한 4가지 body 값
+   * title,content,latitude,longitude
+   */
+  const [title, setTitle] = useState<string>('')
+  const [content, setContent] = useState<string>('')
+
+  /**
+   * 글을 게시하도록 서버에 요청합니다
+   * title, content, latitude, longitude 네 개의 값이 필요합니다
+   */
+  const requestBoardToServer = async () => {
+    try {
+      if (!myLocations.length || !title || !content) {
+        alert('작성되지 않은 문항이 있거나 위치를 설정하지 않았습니다.')
+        return
+      }
+
+      const { latitude, longitude } = getLatLon()
+
+      const result = await postCreateBoard({
+        title,
+        content,
+        latitude,
+        longitude,
+      })
+
+      router.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /**
+   * 옵션에서 선택된 주소의 index를 통해 위치정보를 얻는 함수
+   * @returns latitude, longitude
+   */
+  const getLatLon = () => {
+    const selectedLocationInfo = myLocations.find((loc) => {
+      if (loc.id === selectedLocationIndex) return loc
+    })
+
+    const { latitude, longitude } = selectedLocationInfo!
+
+    return { latitude, longitude }
+  }
+
+  // 모달 상태 관리
   const { modalOpen, toggleModalOpenStatus } = useModal()
 
+  /**
+   * 위치정보 관련(추가 및 조회) 로직
+   */
   const detailInputRef = useRef<any>()
   const { location } = useSelector((state: RootState) => state.locationSlice)
   const { myLocations, handleSetlocation } = useLocation(
@@ -83,23 +154,30 @@ const Create = () => {
 
         <div className="inputContainer">
           <label>이 곳이 현재 계신 곳이 맞으신가요?</label>
-          <input
-            className="inputBox"
-            disabled
-            placeholder="위치 설정이 필요합니다."
-          ></input>
+          <select className="inputBox" onChange={handleChangeSelectedOption}>
+            {myLocations.map((loc, index) => {
+              const text = `${loc.region} ${loc.city} ${loc.town} ${loc.detailLocation}`
+              return (
+                <option key={loc.id} value={index}>
+                  {text}
+                </option>
+              )
+            })}
+          </select>
           <label htmlFor={'title'}>제목</label>
           <input
             className="inputBox"
             type={'text'}
             id={'title'}
             placeholder={'EX) 도와주세요'}
+            onChange={(e) => setTitle(e.target.value)}
           ></input>
           <label htmlFor={'description'}>내용</label>
           <textarea
             className="textareaBox"
             id={'description'}
             placeholder={'바퀴벌레 너무 커요..'}
+            onChange={(e) => setContent(e.target.value)}
             maxLength={100}
           ></textarea>
         </div>
