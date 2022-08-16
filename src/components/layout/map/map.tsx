@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
-import { useMapLoaded } from '../../../hooks/useMapLoaded'
-import CenterMoveButton from '../centerMoveButton/centerMoveButton'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../core/redux/module/rootReducer'
-import ModalBottomSheet from '../modalBottomSheet/modalBottomSheet'
-import { saveModalOpen } from '../../../core/redux/module/modalOpenSlice'
+import { useMapActions } from '../../../hooks/useMapActions'
+import { mapAction } from '../../utils/interface/mapActions'
 
-const Map = () => {
-  const { mapLoaded, onLoadKakaoMap } = useMapLoaded()
+const Map = (props: mapAction) => {
+  /**
+   * map script가 Load되었을 시 map을 그립니다.
+   * props는 맵에 필요한 특정 기능을 활성화 할 수 있게 합니다.
+   */
+  const { mapLoaded, onLoadKakaoMap } = useMapActions(props)
 
   useEffect(() => {
     if (!mapLoaded) return
@@ -15,20 +15,11 @@ const Map = () => {
     onLoadKakaoMap()
   }, [mapLoaded])
 
-  const dispatch = useDispatch()
-  const { marker } = useSelector((state: RootState) => state.markerSlice)
-
-  const closeBottomSheet = () => {
-    dispatch(saveModalOpen({ modalOpen: false }))
-    marker.setMap(null)
-  }
-
   return (
     <>
       <div className="MapContainer" id="map">
         kakaoMap
-        <CenterMoveButton />
-        <ModalBottomSheet closeBottomSheet={closeBottomSheet} />
+        {props.children}
       </div>
 
       <style jsx>{`

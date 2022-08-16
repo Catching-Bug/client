@@ -1,9 +1,9 @@
-import marker, { saveMarker } from './markerSlice'
+import markerSlice, { saveMarker } from './markerSlice'
 
 describe('reducer', () => {
   describe('marker', () => {
     it('change marker object', () => {
-      const state = marker(
+      const state = markerSlice(
         {
           marker: undefined,
         },

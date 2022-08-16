@@ -1,16 +1,16 @@
-import kakaoMap, { saveMapObject } from './kakaoMapSlice'
+import kakaoMapSlice, { saveMapObject } from './kakaoMapSlice'
 
 describe('reducer', () => {
   describe('kakaoMap', () => {
     it('change map object', () => {
-      const state = kakaoMap(
+      const state = kakaoMapSlice(
         {
-          map: '',
+          map: undefined,
         },
-        saveMapObject('mapobj'),
+        saveMapObject({ map: 'mapobj' }),
       )
 
-      expect(state.map).not.toHaveLength(0)
+      expect(state.map).not.toBeUndefined()
     })
   })
 })
