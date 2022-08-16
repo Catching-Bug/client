@@ -25,7 +25,6 @@ jobs:
           NEXT_PUBLIC_KAKAO_LOGIN: ${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN }}
           NEXT_PUBLIC_SERVER_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT }}
         run: |
-          touch .env
           echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=$NEXT_PUBLIC_KAKAO_MAP_APP_KEY"  >> .env
           echo "KAKAO_CLIENT_SECRET=$KAKAO_CLIENT_SECRET" >> .env
           echo "NEXT_PUBLIC_KAKAO_LOGIN=$NEXT_PUBLIC_KAKAO_LOGIN" >> .env
