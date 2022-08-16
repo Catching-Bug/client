@@ -27,7 +27,13 @@ const Main = () => {
         </h1>
         <h2>벌레를 대신 잡아줄 사람이 필요하세요?</h2>
         {loginStatus ? null : (
-          <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN!}>
+          <Link
+            href={
+              process.env.NEXT_PUBLIC_KAKAO_LOGIN
+                ? process.env.NEXT_PUBLIC_KAKAO_LOGIN
+                : '/main'
+            }
+          >
             <Button className="loginButtonContainer">
               <Image
                 src={'/kakao_login_medium_narrow.png'}
