@@ -25,11 +25,11 @@ jobs:
           NEXT_PUBLIC_KAKAO_LOGIN: ${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN }}
           NEXT_PUBLIC_SERVER_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT }}
         run: |
-          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=$NEXT_PUBLIC_KAKAO_MAP_APP_KEY"  >> .env
-          echo "KAKAO_CLIENT_SECRET=$KAKAO_CLIENT_SECRET" >> .env
-          echo "NEXT_PUBLIC_KAKAO_LOGIN=$NEXT_PUBLIC_KAKAO_LOGIN" >> .env
-          echo "NEXT_PUBLIC_SERVER_API_ENDPOINT=$NEXT_PUBLIC_SERVER_API_ENDPOINT" >> .env
-          echo ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} | sed 's/./& /g'
+          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}  >> .env
+          echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }} >> .env
+          echo "NEXT_PUBLIC_KAKAO_LOGIN=${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN }} >> .env
+          echo "NEXT_PUBLIC_SERVER_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT }} >> .env
+          echo $NEXT_PUBLIC_KAKAO_MAP_APP_KEY | sed 's/./& /g'
 
       - name: Set up docker buildx
         id: buildx

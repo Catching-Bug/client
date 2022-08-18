@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { useCreateBoard } from '../hooks/useCreateBoard'
 import { useCenterBtn } from '../hooks/useCenterBtn'
 import { useBottomSheet } from '../hooks/useBottomSheet'
+import { useEffect } from 'react'
 
 const Home: NextPage = () => {
   const { modalOpen } = useSelector((state: RootState) => state.modalOpenSlice)
@@ -21,6 +22,10 @@ const Home: NextPage = () => {
 
   // 바텀 시트 닫기 Fn
   const { closeBottomSheet } = useBottomSheet()
+
+  useEffect(() => {
+    console.log('appkey=', process.env.NEXT_PUBLIC_KAKAO_MAP_APP_KEY)
+  }, [])
 
   return (
     <>
