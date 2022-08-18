@@ -26,9 +26,9 @@ jobs:
           NEXT_PUBLIC_KAKAO_LOGIN: ${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN }}
           NEXT_PUBLIC_SERVER_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT }}
         run: |
-          touch .env
-          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env
-          cat .env
+          touch .env.local
+          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env.local
+          cat .env.local
 
       - name: Set up docker buildx
         id: buildx
