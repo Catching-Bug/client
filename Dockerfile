@@ -5,7 +5,6 @@ WORKDIR /usr/src/app
 ADD . /usr/src/app/
 
 COPY package.json ./
-COPY .env ./
 COPY yarn.lock ./
 
 RUN yarn
