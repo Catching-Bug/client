@@ -18,21 +18,15 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
 
-      - name: Create .env file
-        env:
-          NEXT_PUBLIC_KAKAO_MAP_APP_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}
-          KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
-          NEXT_PUBLIC_KAKAO_LOGIN: ${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN }}
-          NEXT_PUBLIC_SERVER_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT }}
+      - name: Set env
+        id: step_one
         run: |
-          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}"  >> .env
-          echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}" >> .env
-          echo "NEXT_PUBLIC_KAKAO_LOGIN=${{ secrets.NEXT_PUBLIC_KAKAO_LOGIN }}" >> .env
-          echo "NEXT_PUBLIC_SERVER_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_SERVER_API_ENDPOINT }}" >> .env
-          echo $NEXT_PUBLIC_KAKAO_MAP_APP_KEY | sed 's/./& /g'
-          echo $KAKAO_CLIENT_SECRET | sed 's/./& /g'
-          echo $NEXT_PUBLIC_KAKAO_LOGIN | sed 's/./& /g'
-          echo $NEXT_PUBLIC_SERVER_API_ENDPOINT | sed 's/./& /g'
+          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> $GITHUB_ENV
+
+      - name: Use env
+        id: step_two
+        run: |
+          echo "${{ env.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}"
 
       - name: Set up docker buildx
         id: buildx
