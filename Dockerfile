@@ -4,10 +4,8 @@ FROM node:latest
 WORKDIR /usr/src/app
 ADD . /usr/src/app/
 
-# RUN rm yarn.lock || true
-# RUN rm package-lock.json || true
-
 COPY package.json ./
+COPY .env ./
 COPY yarn.lock ./
 
 RUN yarn
