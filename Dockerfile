@@ -1,8 +1,11 @@
 FROM node:latest
 
 # 디렉토리 설정
-WORKDIR /usr/bin/app
-ADD . /usr/bin/app/
+WORKDIR /home/runner/work/client/client/app
+RUN echo "first is : $PWD"
+
+ADD . /home/runner/work/client/client/app
+RUN file="$(ls -1 /home/runner/work/client/client/app)" && echo $file
 
 COPY package.json ./
 COPY yarn.lock ./

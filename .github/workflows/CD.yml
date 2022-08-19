@@ -18,23 +18,17 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
 
-      - name: mkdir app
-        run: |
-          sudo chown -R ubuntu:ubuntu ubuntu
-          mkdir app
-        working-directory: /usr/bin
-
       - name: Set env
         run: |
           touch .env
           echo NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} >> .env
           cat .env
-        working-directory: /usr/bin/app
+        working-directory: /home/runner/work/client/client/app
 
       - name: check dir
         run: |
           ls -al
-        working-directory: /usr/bin/app
+        working-directory: /home/runner/work/client/client/app
 
       - name: Set up docker buildx
         id: buildx
