@@ -6,7 +6,7 @@ WORKDIR /usr/bin/
 COPY package.json .
 COPY yarn.lock .
 COPY . .
-ADD .env .
+# ADD .env .
 
 
 RUN echo "PWD is : $PWD"
