@@ -18,6 +18,11 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
 
+      - name: mkdir app
+        run: |
+          mkdir app
+        working-directory: /usr/bin
+
       - name: Set env
         run: |
           touch .env
