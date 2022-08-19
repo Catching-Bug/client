@@ -18,6 +18,9 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
 
+      - name: mkdir app
+        run: mkdir app
+
       - name: Set env
         run: |
           touch .env
