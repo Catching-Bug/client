@@ -18,9 +18,15 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
 
+      - name: check directory
+        run: pwd
+
       - name: Set env
         run: |
-          echo NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} >> .env.local
+          touch .env
+          echo TEST = "https://test.com" >> .env
+          echo NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} >> .env
+          cat .env
 
       - name: Set up docker buildx
         id: buildx
