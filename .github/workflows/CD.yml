@@ -26,6 +26,7 @@ jobs:
           touch .env
           echo TEST = "https://test.com" >> .env
           echo NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} >> .env
+          run pwd
           cat .env
 
       - name: Set up docker buildx
