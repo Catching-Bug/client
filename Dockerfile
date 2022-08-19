@@ -1,10 +1,10 @@
 FROM node:latest
 
 # 디렉토리 설정
-WORKDIR /app
+# WORKDIR .
 
-COPY package.json /app
-COPY yarn.lock /app
+COPY package.json .
+COPY yarn.lock .
 COPY . .
 
 RUN yarn
