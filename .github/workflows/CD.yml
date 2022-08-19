@@ -23,7 +23,12 @@ jobs:
           touch .env
           echo NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} >> .env
           cat .env
-        working-directory: /usr/bin/
+        working-directory: /home/runner/work/client/client
+
+      - name: check dir
+        run: |
+          ls -al
+        working-directory: /home/runner/work/client/client
 
       - name: Set up docker buildx
         id: buildx
