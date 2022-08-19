@@ -7,6 +7,8 @@ COPY package.json .
 COPY yarn.lock .
 COPY . .
 
+RUN echo "PWD is : $PWD"
+
 RUN yarn
 
 RUN yarn build
