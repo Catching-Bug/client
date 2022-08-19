@@ -25,7 +25,7 @@ jobs:
         run: |
           touch .env
           echo "test" >> dummyFile
-          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}"" >> .env
+          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env
           cat .env
           cat dummyFile
         working-directory: /home/runner/work/client/client/app
