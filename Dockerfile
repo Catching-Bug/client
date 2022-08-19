@@ -1,20 +1,16 @@
 FROM node:latest
 
 # 디렉토리 설정
-WORKDIR /home/runner/work/client/client/app
 RUN echo "first is : $PWD"
 
-ADD . /home/runner/work/client/client/app
-RUN echo $(ls -al /home/runner/work/client/client/app)
+RUN echo $(ls -al)
 
 COPY package.json ./
 COPY yarn.lock ./
 COPY . .
-# ADD .env .
-
 
 RUN echo "second is : $PWD"
-RUN echo $(ls -1 /home/runner/work/client/client/app)
+RUN echo $(ls -1)
 
 RUN yarn
 

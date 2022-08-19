@@ -18,6 +18,12 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
 
+      - name: Set env
+        run: |
+          touch .env
+          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env
+          cat .env
+
       - name: Set up docker buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
@@ -36,23 +42,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
-
-      - name: mkdir app
-        run: mkdir app
-
-      - name: Set env
-        run: |
-          touch .env
-          echo "test" >> dummyFile
-          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}" >> .env
-          cat .env
-          cat dummyFile
-        working-directory: /home/runner/work/client/client/app
-
-      - name: check dir
-        run: |
-          ls -al
-        working-directory: /home/runner/work/client/client/app
 
       - name: Build and push
         id: docker_build
