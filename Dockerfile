@@ -1,10 +1,11 @@
 FROM node:latest
 
 # 디렉토리 설정
-WORKDIR /usr/bin/
+WORKDIR /usr/bin/app
+ADD . /usr/bin/app/
 
-COPY package.json .
-COPY yarn.lock .
+COPY package.json ./
+COPY yarn.lock ./
 COPY . .
 # ADD .env .
 
