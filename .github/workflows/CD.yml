@@ -24,8 +24,10 @@ jobs:
       - name: Set env
         run: |
           touch .env
-          echo NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }} >> .env
+          echo "test" >> dummyFile
+          echo "NEXT_PUBLIC_KAKAO_MAP_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_MAP_APP_KEY }}"" >> .env
           cat .env
+          cat dummyFile
         working-directory: /home/runner/work/client/client/app
 
       - name: check dir
@@ -51,9 +53,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
-
-      - name: where
-        run: pwd
 
       - name: Build and push
         id: docker_build
