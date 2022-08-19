@@ -5,7 +5,7 @@ WORKDIR /home/runner/work/client/client
 
 COPY package.json .
 COPY yarn.lock .
-COPY . .
+COPY .env .
 
 RUN echo "PWD is : $PWD"
 
