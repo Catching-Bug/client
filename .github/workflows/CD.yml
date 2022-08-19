@@ -20,6 +20,7 @@ jobs:
 
       - name: mkdir app
         run: |
+          sudo chown -R ubuntu:ubuntu ubuntu
           mkdir app
         working-directory: /usr/bin
 
