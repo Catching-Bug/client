@@ -1,7 +1,7 @@
 FROM node:latest
 
 # 디렉토리 설정
-# WORKDIR .
+WORKDIR /home/runner/work/client/client
 
 COPY package.json .
 COPY yarn.lock .
@@ -14,6 +14,4 @@ RUN yarn build
 ENV HOST 0.0.0.0
 EXPOSE 3000
 
-CMD ["ls", "-al"]
-
-# CMD ["yarn", "start"]
+CMD ["yarn", "start"]
