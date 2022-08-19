@@ -4,6 +4,8 @@ FROM node:latest
 WORKDIR /home/runner/work/client/client/app
 RUN echo "first is : $PWD"
 
+RUN --mount=type=secret,id=NEXT_PUBLIC_KAKAO_MAP_APP_KEY echo $NEXT_PUBLIC_KAKAO_MAP_APP_KEY && echo hi
+
 ADD . /home/runner/work/client/client/app
 RUN echo $(ls -al /home/runner/work/client/client/app)
 
