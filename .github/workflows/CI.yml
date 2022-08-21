@@ -3,12 +3,12 @@ name: Client_CI
 on:
   push:
     branches:
-      # - main
+      - main
       - develop
       - feature/*
   pull_request:
     branches:
-      # - main
+      - main
       - develop
 
 jobs:
@@ -29,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      # - name: Run tests
-      #   run: yarn test
+      - name: Run test code
+        run: yarn test
 
       - name: action-slack
         uses: 8398a7/action-slack@v3

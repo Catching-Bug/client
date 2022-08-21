@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { wrapper } from '../core/redux/store/makeStore'
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 declare global {
   interface Window {
@@ -10,6 +11,16 @@ declare global {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const setScreenSize = () => {
+      let new_vh = window.innerHeight * 0.01
+
+      document.documentElement.style.setProperty('--vh', `${new_vh}px`)
+    }
+
+    window.addEventListener('resize', () => setScreenSize())
+  }, [])
+
   return (
     <>
       <Head>
@@ -24,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           display: flex;
           justify-content: center;
           width: 100vw;
-          height: 100vh;
+          height: calc(var(--vh, 1vh) * 100);
         }
       `}</style>
     </>

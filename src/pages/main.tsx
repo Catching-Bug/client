@@ -31,7 +31,7 @@ const Main = () => {
             href={
               process.env.NEXT_PUBLIC_KAKAO_LOGIN
                 ? process.env.NEXT_PUBLIC_KAKAO_LOGIN
-                : '/main'
+                : '/'
             }
           >
             <Button className="loginButtonContainer">
