@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 import { useMapActions } from '../../../hooks/useMapActions'
+import { mockingCustomOverlay } from '../../../__mocks__/axiosMock'
 import { mapAction } from '../../utils/interface/mapActions'
+
+mockingCustomOverlay()
 
 const Map = (props: mapAction) => {
   /**

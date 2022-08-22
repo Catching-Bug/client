@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -54,6 +54,8 @@ const Create = () => {
         latitude,
         longitude,
       })
+
+      // id값을 가지고 있기?
 
       router.push('/')
     } catch (error) {
@@ -229,7 +231,7 @@ const Create = () => {
           font-size: 1.3em;
           padding-left: 5px;
           margin: 20px 0;
-          background-color: white;
+          background-color: #ffffff;
         }
 
         .textareaBox {
