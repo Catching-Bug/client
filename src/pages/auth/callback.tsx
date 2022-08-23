@@ -2,22 +2,6 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Loading from '../../components/layout/loading/loading'
 import { getAuthLogin } from '../../core/api/user'
-import MockAdapter from 'axios-mock-adapter'
-import { defaultAxios } from '../../core/api/instance/defaultInstance'
-
-/**
- * login request mock adapter
- */
-if (typeof window !== 'undefined') {
-  const mock = new MockAdapter(defaultAxios)
-
-  mock.onGet('/api/login/oauth', { params: { code: 'code' } }).reply(200, {
-    accessToken: 'accessToken',
-    refreshToken: 'refreshToken',
-    gender: 'male',
-    nickName: 'nickname',
-  })
-}
 
 const Callback = () => {
   const router = useRouter()

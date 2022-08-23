@@ -3,13 +3,19 @@ import { createSlice } from '@reduxjs/toolkit'
 interface initialType {
   customOverlay: object[]
   overlayDeleteDetection: boolean
-  zoomLevel: number
+  centerLocation: {
+    latitude: number
+    longitude: number
+  }
 }
 
 const initialState: initialType = {
   customOverlay: [],
   overlayDeleteDetection: false,
-  zoomLevel: 10, // 1, 4, 7, 10을 기준으로 합니다.
+  centerLocation: {
+    latitude: 0,
+    longitude: 0,
+  },
 } // 초기 상태 정의
 
 const customOverlaySlice = createSlice({
@@ -22,8 +28,8 @@ const customOverlaySlice = createSlice({
     changeOverlayDeleteDetection: (state, action) => {
       state.overlayDeleteDetection = action.payload.overlayDeleteDetection
     },
-    saveZoomLevel: (state, action) => {
-      state.zoomLevel = action.payload.zoomLevel
+    changeCenterLocation: (state, action) => {
+      state.centerLocation = action.payload.centerLocation
     },
   },
 })
@@ -31,6 +37,6 @@ const customOverlaySlice = createSlice({
 export const {
   saveCustomOverlays,
   changeOverlayDeleteDetection,
-  saveZoomLevel,
+  changeCenterLocation,
 } = customOverlaySlice.actions // 액션 생성함수
 export default customOverlaySlice.reducer // 리듀서

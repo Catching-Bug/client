@@ -7,10 +7,9 @@ import {
 import {
   changeOverlayDeleteDetection,
   saveCustomOverlays,
-  saveZoomLevel,
 } from '../../../core/redux/module/customOverlaySlice'
 
-interface regionTypes {
+interface boardContentType {
   regionName: string
   latitude: number
   longitude: number
@@ -21,55 +20,55 @@ export const handleCustomOverlay = (
   zoomLevel: number,
   map: any,
   dispatch: Dispatch<any>,
+  detailLocation: string,
 ) => {
   dispatch(changeOverlayDeleteDetection({ overlayDeleteDetection: true }))
 
+  const [region, city, town, ...etc] = detailLocation.split(' ')
+
   if (zoomLevel >= 10) {
-    drawCustomOverlays(getRegionCount, dispatch, map)
-  } else if (zoomLevel >= 7) {
-    drawCustomOverlays(getCitiesCount, dispatch, map)
-  } else if (zoomLevel >= 4) {
-    drawCustomOverlays(getTownsCount, dispatch, map)
+    drawCustomOverlays(getRegionCount(), dispatch, map)
+  } else if (zoomLevel >= 5) {
+    drawCustomOverlays(getCitiesCount(region), dispatch, map)
   } else {
+    drawCustomOverlays(getTownsCount(city), dispatch, map)
   }
 }
 
 const drawCustomOverlays = async (
-  fetch: () => Promise<any>,
+  fetch: Promise<any>,
   dispatch: Dispatch<any>,
   map: any,
 ) => {
-  // try {
-  const result = await fetch()
+  try {
+    const result = await fetch
 
-  const overlays: object[] = []
+    const overlays: object[] = []
 
-  result?.content?.forEach((location: regionTypes) => {
-    const content = getContentDesign(location.count)
+    result?.content?.forEach((location: boardContentType) => {
+      const content = getContentDesign(location.count)
 
-    const position = new window.kakao.maps.LatLng(
-      location.latitude,
-      location.longitude,
-    )
+      const position = new window.kakao.maps.LatLng(
+        location.latitude,
+        location.longitude,
+      )
 
-    const customOverlay = new window.kakao.maps.CustomOverlay({
-      position: position,
-      content: content,
+      const customOverlay = new window.kakao.maps.CustomOverlay({
+        position: position,
+        content: content,
+      })
+
+      overlays.push(customOverlay)
     })
 
-    overlays.push(customOverlay)
-  })
+    overlays.forEach((marker: any) => {
+      marker.setMap(map)
+    })
 
-  console.log(overlays)
-
-  overlays.forEach((marker: any) => {
-    marker.setMap(map)
-  })
-
-  dispatch(saveCustomOverlays({ customOverlay: overlays }))
-  // } catch (error) {
-  //   console.log(error, '문제 생김')
-  // }
+    dispatch(saveCustomOverlays({ customOverlay: overlays }))
+  } catch (error) {
+    console.log('handleCustomOverlay 에러')
+  }
 }
 
 const getContentDesign = (count: number) => {

@@ -26,6 +26,8 @@ export const searchDetailAddr = ({
             longitude: mouseEventLatLng.La,
           }),
         )
+
+        return detailLocation
       }
     },
   )

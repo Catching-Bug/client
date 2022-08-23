@@ -25,9 +25,11 @@ export const getRegionCount = async () => {
  * GET : 구 단위의 위 경도 및 글 수를 조회합니다
  * @returns data 검색된 구 단위의 데이터
  */
-export const getCitiesCount = async () => {
+export const getCitiesCount = async (regionName: string) => {
   try {
-    const { data } = await authAxios.get('/api/cities/count')
+    const { data } = await authAxios.get('/api/cities/count', {
+      params: { regionName: regionName },
+    })
 
     return data
   } catch (error) {
@@ -39,9 +41,11 @@ export const getCitiesCount = async () => {
  * GET : 동 단위의 위 경도 및 글 수를 조회합니다
  * @returns data 검색된 동 단위의 데이터
  */
-export const getTownsCount = async () => {
+export const getTownsCount = async (cityName: string) => {
   try {
-    const { data } = await authAxios.get('/api/towns/count')
+    const { data } = await authAxios.get('/api/towns/count', {
+      params: { cityName: cityName },
+    })
 
     return data
   } catch (error) {

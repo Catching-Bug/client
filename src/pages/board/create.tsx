@@ -8,10 +8,6 @@ import { useModal } from '../../hooks/useModal'
 import Button from '../../components/layout/button/button'
 import Map from '../../components/layout/map/map'
 import Modal from '../../components/layout/modal/modal'
-
-import MockAdapter from 'axios-mock-adapter'
-import { authAxios } from '../../core/api/instance/authInstance'
-import { defaultAxios } from '../../core/api/instance/defaultInstance'
 import { useLocation } from '../../hooks/useLocation'
 import { postCreateBoard } from '../../core/api/board'
 
@@ -296,40 +292,3 @@ const Create = () => {
 }
 
 export default Create
-
-/**
- * 위치 관련 요청에 대한 mock adapter
- */
-if (typeof window !== 'undefined') {
-  const authMock = new MockAdapter(authAxios)
-  const defaultMock = new MockAdapter(defaultAxios)
-
-  /**
-   * 사용자 위치 전부 조회
-   */
-  authMock.onGet('/api/locations').reply(200, [
-    {
-      id: 0,
-      latitude: 33,
-      longitude: 125,
-      region: '서울특별시',
-      city: '서울구',
-      town: '서울동',
-      detailLocation: '서울아파트 103호',
-    },
-  ])
-
-  /**
-   * 사용자 위치 등록
-   */
-  authMock.onPost('/api/locations').reply(200, { id: 1 })
-
-  authMock.onPost('/api/board').reply(200, { id: 2 })
-
-  /**
-   * 리프레시 토큰 intercept 요청
-   */
-  defaultMock
-    .onPost('/api/token/refresh')
-    .reply(200, { refreshToken: 'new refresh', accessToken: 'new access' })
-}

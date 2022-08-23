@@ -1,7 +1,7 @@
 import customOverlaySlice, {
+  changeCenterLocation,
   changeOverlayDeleteDetection,
   saveCustomOverlays,
-  saveZoomLevel,
 } from './customOverlaySlice'
 
 describe('reducer', () => {
@@ -11,7 +11,10 @@ describe('reducer', () => {
         {
           customOverlay: [],
           overlayDeleteDetection: false,
-          zoomLevel: 4,
+          centerLocation: {
+            latitude: 0,
+            longitude: 0,
+          },
         },
         saveCustomOverlays({
           customOverlay: [{ obj: 'obj' }],
@@ -26,7 +29,10 @@ describe('reducer', () => {
         {
           customOverlay: [],
           overlayDeleteDetection: false,
-          zoomLevel: 4,
+          centerLocation: {
+            latitude: 0,
+            longitude: 0,
+          },
         },
         changeOverlayDeleteDetection({
           overlayDeleteDetection: true,
@@ -41,14 +47,23 @@ describe('reducer', () => {
         {
           customOverlay: [],
           overlayDeleteDetection: false,
-          zoomLevel: 4,
+          centerLocation: {
+            latitude: 0,
+            longitude: 0,
+          },
         },
-        saveZoomLevel({
-          zoomLevel: 7,
+        changeCenterLocation({
+          centerLocation: {
+            latitude: 36,
+            longitude: 127,
+          },
         }),
       )
 
-      expect(state.zoomLevel).toBe(7)
+      expect(state.centerLocation).toStrictEqual({
+        latitude: 36,
+        longitude: 127,
+      })
     })
   })
 })

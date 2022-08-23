@@ -3,12 +3,15 @@ import type { AppProps } from 'next/app'
 import { wrapper } from '../core/redux/store/makeStore'
 import Head from 'next/head'
 import { useEffect } from 'react'
+import { mockingCustomOverlay } from '../__mocks__/axiosMock'
 
 declare global {
   interface Window {
     kakao: any
   }
 }
+
+mockingCustomOverlay()
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
