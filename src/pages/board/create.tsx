@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -8,49 +8,8 @@ import { useModal } from '../../hooks/useModal'
 import Button from '../../components/layout/button/button'
 import Map from '../../components/layout/map/map'
 import Modal from '../../components/layout/modal/modal'
-
-import MockAdapter from 'axios-mock-adapter'
-import { authAxios } from '../../core/api/instance/authInstance'
-import { defaultAxios } from '../../core/api/instance/defaultInstance'
 import { useLocation } from '../../hooks/useLocation'
 import { postCreateBoard } from '../../core/api/board'
-
-/**
- * 위치 관련 요청에 대한 mock adapter
- */
-if (typeof window !== 'undefined') {
-  const authMock = new MockAdapter(authAxios)
-  const defaultMock = new MockAdapter(defaultAxios)
-
-  /**
-   * 사용자 위치 전부 조회
-   */
-  authMock.onGet('/api/locations').reply(200, [
-    {
-      id: 0,
-      latitude: 33,
-      longitude: 125,
-      region: '서울특별시',
-      city: '서울구',
-      town: '서울동',
-      detailLocation: '서울아파트 103호',
-    },
-  ])
-
-  /**
-   * 사용자 위치 등록
-   */
-  authMock.onPost('/api/locations').reply(200, { id: 1 })
-
-  authMock.onPost('/api/board').reply(200, { id: 2 })
-
-  /**
-   * 리프레시 토큰 intercept 요청
-   */
-  defaultMock
-    .onPost('/api/token/refresh')
-    .reply(200, { refreshToken: 'new refresh', accessToken: 'new access' })
-}
 
 const Create = () => {
   const router = useRouter()
@@ -91,6 +50,8 @@ const Create = () => {
         latitude,
         longitude,
       })
+
+      // id값을 가지고 있기?
 
       router.push('/')
     } catch (error) {
@@ -148,7 +109,7 @@ const Create = () => {
             className={'locationChangeButton'}
             onClick={toggleModalOpenStatus}
           >
-            내 위치 변경
+            내 위치 수정
           </Button>
         </header>
 
@@ -193,7 +154,7 @@ const Create = () => {
       >
         <div className="modalContainer">
           <header className="modalHeaderBar">
-            <h1>위치 선택하기</h1>
+            <h1>위치 수정하기</h1>
             <Button className="modalCloseBtn" onClick={toggleModalOpenStatus}>
               <Image
                 src={'/previous_btn.png'}
@@ -211,7 +172,7 @@ const Create = () => {
               id="location"
               disabled
               placeholder={
-                location ? location : '잘못된 위치이거나 없는 주소입니다.'
+                location ? location : '지도에서 원하는 위치를 선택해주세요.'
               }
             ></input>
             <label htmlFor="detail">상세 주소를 입력해주세요.</label>
@@ -266,6 +227,7 @@ const Create = () => {
           font-size: 1.3em;
           padding-left: 5px;
           margin: 20px 0;
+          background-color: #ffffff;
         }
 
         .textareaBox {
@@ -277,6 +239,8 @@ const Create = () => {
           font-size: 1.3em;
           padding-left: 5px;
           margin: 20px 0;
+          resize: none;
+          background-color: white;
         }
 
         .modalContainer {

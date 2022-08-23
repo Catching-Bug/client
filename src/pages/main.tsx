@@ -27,21 +27,17 @@ const Main = () => {
         </h1>
         <h2>벌레를 대신 잡아줄 사람이 필요하세요?</h2>
         {loginStatus ? null : (
-          <Link
-            href={
-              process.env.NEXT_PUBLIC_KAKAO_LOGIN
-                ? process.env.NEXT_PUBLIC_KAKAO_LOGIN
-                : '/main'
-            }
-          >
-            <Button className="loginButtonContainer">
-              <Image
-                src={'/kakao_login_medium_narrow.png'}
-                width={183}
-                height={45}
-                alt={'로그인'}
-              ></Image>
-            </Button>
+          <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN!}>
+            <a>
+              <Button className="loginButtonContainer">
+                <Image
+                  src={'/kakao_login_medium_narrow.png'}
+                  width={183}
+                  height={45}
+                  alt={'로그인'}
+                ></Image>
+              </Button>
+            </a>
           </Link>
         )}
       </div>
