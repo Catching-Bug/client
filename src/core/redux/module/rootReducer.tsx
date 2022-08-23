@@ -5,6 +5,7 @@ import centerLatLonSlice from './centerLatLonSlice'
 import modalOpenSlice from './modalOpenSlice'
 import markerSlice from './markerSlice'
 import locationSlice from './locationSlice'
+import customOverlaySlice from './customOverlaySlice'
 
 const rootReducer = combineReducers({
   kakaoMapSlice,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   modalOpenSlice,
   markerSlice,
   locationSlice,
+  customOverlaySlice,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

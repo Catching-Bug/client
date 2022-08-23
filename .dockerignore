@@ -1,4 +1,4 @@
 .next
-node_module
-README.md
 .gitignore
+node_module
+*.md

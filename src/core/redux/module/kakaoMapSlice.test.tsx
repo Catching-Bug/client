@@ -6,11 +6,19 @@ describe('reducer', () => {
       const state = kakaoMapSlice(
         {
           map: undefined,
+          marker: undefined,
+          geocoder: undefined,
         },
-        saveMapObject({ map: 'mapobj' }),
+        saveMapObject({
+          map: 'mapobj',
+          marker: 'mapobj',
+          geocoder: 'geocoder',
+        }),
       )
 
       expect(state.map).not.toBeUndefined()
+      expect(state.marker).not.toBeUndefined()
+      expect(state.geocoder).not.toBeUndefined()
     })
   })
 })

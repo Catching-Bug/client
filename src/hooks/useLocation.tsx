@@ -55,6 +55,7 @@ export const useLocation = (
 
       // 추가된 내 위치 저장
       setMyLocations([
+        ...myLocations,
         {
           id: result.id,
           latitude: latitude,
@@ -64,7 +65,6 @@ export const useLocation = (
           town: town,
           detailLocation: detailLocation,
         },
-        ...myLocations,
       ])
 
       toggleModalOpenStatus()

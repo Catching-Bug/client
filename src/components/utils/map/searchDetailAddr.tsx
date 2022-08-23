@@ -17,9 +17,7 @@ export const searchDetailAddr = ({
     geocoder,
     function (result: any, status: any) {
       if (status === window.kakao.maps.services.Status.OK) {
-        const detailLocation = !!result[0].road_address
-          ? result[0].road_address.address_name
-          : null
+        const detailLocation = result[0].address.address_name
 
         dispatch(
           saveLocation({
@@ -28,6 +26,8 @@ export const searchDetailAddr = ({
             longitude: mouseEventLatLng.La,
           }),
         )
+
+        return detailLocation
       }
     },
   )

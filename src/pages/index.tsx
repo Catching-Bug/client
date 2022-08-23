@@ -24,7 +24,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Map showMyLocation>
+      <Map showMyLocation getAroundUserBoard>
         <Button className="creatingBtn" onClick={createBoard}>
           <Image
             width={40}
