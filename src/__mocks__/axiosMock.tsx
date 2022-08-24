@@ -94,6 +94,19 @@ export const mockingCustomOverlay = () => {
       ],
     })
 
+    authMock.onGet('/api/boards').reply(200, {
+      content: {
+        board: [
+          {
+            id: 1,
+            title: '제목',
+            content: '내용',
+            nickName: '작성자 닉네임',
+          },
+        ],
+      },
+    })
+
     /**
      * 사용자 위치 전부 조회
      */

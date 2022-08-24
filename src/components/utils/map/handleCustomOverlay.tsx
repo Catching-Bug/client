@@ -36,7 +36,7 @@ export const handleCustomOverlay = (
 
   if (zoomLevel >= 10) {
     drawCustomOverlays(getRegionCount(), dispatch, map)
-  } else if (zoomLevel >= 5) {
+  } else if (zoomLevel >= 7) {
     drawCustomOverlays(getCitiesCount(region), dispatch, map)
   } else {
     drawCustomOverlays(getTownsCount(city), dispatch, map, true)
