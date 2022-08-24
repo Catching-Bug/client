@@ -74,19 +74,19 @@ export const mockingCustomOverlay = () => {
     authMock.onGet('/api/towns/count').reply(200, {
       content: [
         {
-          regionName: '계대동문',
+          townName: '계대동문',
           latitude: 35.858017749900135,
           longitude: 128.49732723863949,
           count: 127,
         },
         {
-          regionName: '와룡',
+          townName: '와룡',
           latitude: 35.861423236695884,
           longitude: 128.50604835056703,
           count: 8,
         },
         {
-          regionName: '계대',
+          townName: '계대',
           latitude: 35.85636622364355,
           longitude: 128.48954738009178,
           count: 87,
