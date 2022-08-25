@@ -99,9 +99,52 @@ export const mockingCustomOverlay = () => {
         board: [
           {
             id: 1,
-            title: '제목',
-            content: '내용',
-            nickName: '작성자 닉네임',
+            title: '안녕하세요',
+            content: '이거 잡아주실수있나요?',
+            nickName: '킹갓제네럴기리보이',
+          },
+          {
+            id: 2,
+            title: '여기 대방동인데요',
+            content: '바퀴벌레 이따시만한거있어요',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 3,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 4,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 5,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 6,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 7,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 8,
+            title: '하이루',
+            content:
+              '길이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ11',
+            nickName: '작성자 닉네임2',
           },
         ],
       },

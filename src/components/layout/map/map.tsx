@@ -32,7 +32,7 @@ const Map = (props: mapAction) => {
         .MapContainer {
           max-width: 1024px;
           width: 100%;
-          height: 100%;
+          height: calc(var(--vh, 1vh) * 100);
         }
       `}</style>
     </>

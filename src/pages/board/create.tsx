@@ -273,6 +273,7 @@ const Create = () => {
         .locationInput {
           height: 30px;
           margin: 10px 0;
+          background-color: white;
         }
 
         h1 {

@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { getBoard } from '../core/api/board'
+import { boardTypes } from '../components/utils/interface/boardType'
 
 export const useBoardList = () => {
   const router = useRouter()
 
   const [townName, setTownName] = useState<string | string[]>()
-  const [boardList, setBoardList] = useState()
+  const [boardList, setBoardList] = useState<boardTypes[] | []>([])
 
   useEffect(() => {
     if (router.query) {
