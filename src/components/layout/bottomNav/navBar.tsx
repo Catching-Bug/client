@@ -10,15 +10,33 @@ const NavBar = () => {
       <nav className="navBarContainer">
         <div className="navBarItems">
           <Link href={'/main'}>
-            <button className="ItemButton" type="button">
-              <Image src={`/home_icon.png`} width="30px" height="30px"></Image>
+            <button
+              className="ItemButton"
+              type="button"
+              data-testid="homeButton"
+            >
+              <Image
+                src={`/home_icon.png`}
+                width="30px"
+                height="30px"
+                alt="홈이동"
+              ></Image>
             </button>
           </Link>
         </div>
         <div className="navBarItems">
           <Link href={'/'}>
-            <button className="ItemButton" type="button">
-              <Image src={`/map_icon.png`} width="30px" height="30px"></Image>
+            <button
+              className="ItemButton"
+              type="button"
+              data-testid="mapButton"
+            >
+              <Image
+                src={`/map_icon.png`}
+                width="30px"
+                height="30px"
+                alt="지도이동"
+              ></Image>
             </button>
           </Link>
         </div>

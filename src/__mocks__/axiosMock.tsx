@@ -74,24 +74,80 @@ export const mockingCustomOverlay = () => {
     authMock.onGet('/api/towns/count').reply(200, {
       content: [
         {
-          regionName: '계대동문',
+          townName: '계대동문',
           latitude: 35.858017749900135,
           longitude: 128.49732723863949,
           count: 127,
         },
         {
-          regionName: '와룡',
+          townName: '와룡',
           latitude: 35.861423236695884,
           longitude: 128.50604835056703,
           count: 8,
         },
         {
-          regionName: '계대',
+          townName: '계대',
           latitude: 35.85636622364355,
           longitude: 128.48954738009178,
           count: 87,
         },
       ],
+    })
+
+    authMock.onGet('/api/boards').reply(200, {
+      content: {
+        board: [
+          {
+            id: 1,
+            title: '안녕하세요',
+            content: '이거 잡아주실수있나요?',
+            nickName: '킹갓제네럴기리보이',
+          },
+          {
+            id: 2,
+            title: '여기 대방동인데요',
+            content: '바퀴벌레 이따시만한거있어요',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 3,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 4,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 5,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 6,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 7,
+            title: '제목2',
+            content: '내용2',
+            nickName: '작성자 닉네임2',
+          },
+          {
+            id: 8,
+            title: '하이루',
+            content:
+              '길이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ11',
+            nickName: '작성자 닉네임2',
+          },
+        ],
+      },
     })
 
     /**
