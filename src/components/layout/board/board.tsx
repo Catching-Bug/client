@@ -1,26 +1,50 @@
 import Image from 'next/image'
 import { boardTypes } from '../../utils/interface/boardType'
 
+/**
+ * 게시글 관련한 컴포넌트입니다
+ * @param id primary key값
+ * @param title board 제목
+ * @param content board 내용
+ * @param nickname board 작성자
+ */
 const Board = ({ id, title, content, nickName }: boardTypes) => {
+  const handleToGoDetailBoard = () => {
+    // 보드 상세정보로 이동하는 함수
+  }
+
   return (
     <>
-      <div className="boardConatiner">
-        <div className="image">
-          <Image
-            width={50}
-            height={50}
-            src={'/catchbug_icon.png'}
-            alt={'보드이미지'}
-          ></Image>
+      <button type="button" onClick={handleToGoDetailBoard}>
+        <div className="boardConatiner">
+          <div className="image">
+            <Image
+              width={50}
+              height={50}
+              src={'/catchbug_icon.png'}
+              alt={'보드이미지'}
+            ></Image>
+          </div>
+          <div className="bodyContainer">
+            <h1 className="title">{title}</h1>
+            <span className="nickName">{nickName}</span>
+            <span className="content">{content}</span>
+          </div>
         </div>
-        <div className="bodyContainer">
-          <h1 className="title">{title}</h1>
-          <span className="nickName">{nickName}</span>
-          <span className="content">{content}</span>
-        </div>
-      </div>
+      </button>
       <hr />
+
       <style jsx>{`
+        button {
+          border: none;
+          background-color: white;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: lightgray;
+        }
+
         .boardConatiner {
           width: 100%;
           height: 120px;
@@ -47,6 +71,7 @@ const Board = ({ id, title, content, nickName }: boardTypes) => {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          text-align: left;
         }
 
         .title {

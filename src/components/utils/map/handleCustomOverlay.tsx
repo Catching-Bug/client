@@ -32,7 +32,7 @@ export const handleCustomOverlay = (
 ) => {
   dispatch(changeOverlayDeleteDetection({ overlayDeleteDetection: true }))
 
-  const [region, city, town, ..._] = detailLocation.split(' ')
+  const [region, city, t, ...e] = detailLocation.split(' ')
 
   if (zoomLevel >= 10) {
     drawCustomOverlays(getRegionCount(), dispatch, map)
@@ -64,7 +64,16 @@ const handleFetchData = (
   map: any,
   isTown?: boolean,
 ) => {
+  const { overlays, latlon } = parseResultBoardInfo(result)
+
+  addEventToOverlay(overlays, latlon, map, isTown)
+
+  dispatch(saveCustomOverlays({ customOverlay: overlays }))
+}
+
+const parseResultBoardInfo = (result: boardFetchDatas) => {
   const overlays: object[] = []
+  const latlon: object[] = []
 
   result?.content?.forEach((location: boardContentType, index) => {
     let content: string = ''
@@ -83,23 +92,36 @@ const handleFetchData = (
     })
 
     overlays.push(customOverlay)
+    latlon.push(position)
   })
 
+  return { overlays, latlon }
+}
+
+const addEventToOverlay = (
+  overlays: object[],
+  latlon: object[],
+  map: any,
+  isTown?: boolean,
+) => {
   overlays.forEach((marker: any, index: number) => {
     marker.setMap(map)
 
-    if (isTown) {
-      const markerElement = document.getElementById(`marker${index}`)
+    const markerElement = document.getElementById(`marker${index}`)
 
-      if (markerElement) {
-        markerElement.addEventListener('click', (event) => {
+    if (markerElement) {
+      markerElement.addEventListener('click', (event) => {
+        if (isTown)
           Router.push(`/board/list/${(event.target as Element).className}`)
-        })
-      }
+        else {
+          const level = map.getLevel()
+
+          if (level >= 10) map.setLevel(8, { anchor: latlon[index] })
+          else if (level >= 7) map.setLevel(5, { anchor: latlon[index] })
+        }
+      })
     }
   })
-
-  dispatch(saveCustomOverlays({ customOverlay: overlays }))
 }
 
 const getContentDesign = (count: number, index: number, townName?: string) => {
