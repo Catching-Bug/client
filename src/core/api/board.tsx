@@ -58,9 +58,15 @@ export const getTownsCount = async (cityName: string) => {
  * @param townName 검색할 위치의 동 단위 이름
  * @returns 동 단위로 검색한 게시글들을 반환합니다
  */
-export const getBoard = async (townName?: string | string[]) => {
+export const getBoard = async (
+  townName: string,
+  size: number,
+  page: number,
+) => {
   try {
-    const { data } = await authAxios.get('/api/boards')
+    const { data } = await authAxios.get('/api/boards', {
+      params: { townName: townName, size: size, page: page },
+    })
 
     return data
   } catch (error) {
