@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Board from '../../../components/layout/board/board'
+import BoardList from '../../../components/layout/board/boardList'
 import Header from '../../../components/layout/header/header'
 import { boardTypes } from '../../../components/utils/interface/boardType'
 import { useBoardList } from '../../../hooks/useBoardList'
@@ -15,13 +15,15 @@ const List = () => {
         <div className="displayContainer">
           {boardList.map((board: boardTypes) => {
             return (
-              <Board
+              <BoardList
                 key={board.id}
-                id={board.id}
                 title={board.title}
                 content={board.content}
                 nickName={board.nickName}
-              ></Board>
+                onClick={() => {
+                  router.push(`/board/${board.id}`)
+                }}
+              ></BoardList>
             )
           })}
         </div>
@@ -32,7 +34,7 @@ const List = () => {
           width: 100%;
           height: 100%;
           align-items: center;
-          overflow-y: scroll;
+          overflow-y: auto;
           overflow-x: hidden;
           position: absolute;
         }
