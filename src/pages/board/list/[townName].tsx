@@ -1,17 +1,16 @@
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import BoardList from '../../../components/layout/board/boardList'
 import Header from '../../../components/layout/header/header'
 import { boardTypes } from '../../../components/utils/interface/boardType'
 import { useBoardList } from '../../../hooks/useBoardList'
 
 const List = () => {
-  const router = useRouter()
   const { boardList } = useBoardList()
 
   return (
     <>
       <div className="listContainer">
-        <Header onClick={() => router.back()} title={'둘러보기'}></Header>
+        <Header onClick={() => Router.back()} title={'둘러보기'}></Header>
         <div className="displayContainer">
           {boardList.map((board: boardTypes) => {
             return (
@@ -21,7 +20,7 @@ const List = () => {
                 content={board.content}
                 nickName={board.nickName}
                 onClick={() => {
-                  router.push(`/board/${board.id}`)
+                  Router.push(`/board/${board.id}`)
                 }}
               ></BoardList>
             )

@@ -111,9 +111,11 @@ const addEventToOverlay = (
 
     if (markerElement) {
       markerElement.addEventListener('click', (event) => {
-        if (isTown)
-          Router.push(`/board/list/${(event.target as Element).className}`)
-        else {
+        if (isTown) {
+          const townName = (event.target as Element).className
+
+          Router.push(`/board/list/${townName}`)
+        } else {
           const level = map.getLevel()
 
           if (level >= 10) map.setLevel(8, { anchor: latlon[index] })

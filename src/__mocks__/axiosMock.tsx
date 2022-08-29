@@ -166,6 +166,36 @@ export const mockingCustomOverlay = () => {
     ])
 
     /**
+     * 게시글 조회
+     */
+    authMock.onGet('/api/board/1').reply(200, {
+      content: {
+        id: '1',
+        region: '서울',
+        city: '강남구',
+        town: '강남동',
+        detailLocation: '강남아파트 101호',
+        createdTime: '2022-08-05THH:MM:SS',
+        roomTitle: '제목',
+        roomContent: '내용',
+        creatorNickname: '글쓴이',
+        creatorId: '글쓴이 ID',
+        latitude: '33',
+        longitude: '127',
+        status: 'WAITING' /*WAITING , MATCHED*/,
+
+        employ: {
+          //게시글이 waiting 상태의 경우 null값
+          employId: '15',
+          employerId: '1',
+          employeeId: '2',
+          employeeNickname: '글쓴이',
+          employerNickname: '피고용자',
+        },
+      },
+    })
+
+    /**
      * 사용자 위치 등록
      */
     authMock.onPost('/api/locations').reply(200, { id: 1 })

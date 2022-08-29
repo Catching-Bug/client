@@ -7,31 +7,20 @@ interface boardBodyType {
 const Body = ({ title, content, creatorNickname }: boardBodyType) => {
   return (
     <>
-      <body className="bodyContainer">
-        <span className="creator">{creatorNickname}</span>
-        <h1 className="title">{title}</h1>
-        <p className="content">{content}</p>
-        <span className="commentCounter">2</span>
-      </body>
+      <p className="creator">{creatorNickname}</p>
+      <h1 className="title">{title}</h1>
+      <p className="content">{content}</p>
+      <div className="additionalWrapper">
+        <p className="commentCounter">2</p>
+        <p className="createTime">2분 전</p>
+      </div>
 
       <style jsx>{`
-        .bodyContainer {
-          margin-top: 60px;
-          margin-bottom: 10px;
-          width: 100%;
-          /* height: calc(var(--vh, 1vh) * 100); */
-          background-color: white;
-          box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
-          overflow-y: auto;
-          padding: 10px;
-        }
-
         .title {
           width: 100%;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          height: 21px;
           margin: 10px 0;
           font-size: 1.3em;
         }
@@ -42,12 +31,27 @@ const Body = ({ title, content, creatorNickname }: boardBodyType) => {
         }
 
         .content {
+          font-size: 1em;
           word-wrap: break-word;
+        }
+
+        .additionalWrapper {
+          width: 100%;
+          display: flex;
+          align-items: center;
         }
 
         .commentCounter {
           color: darkblue;
           font-size: 0.7em;
+          margin: 5px;
+          /* padding-top: 20px; */
+        }
+
+        .createTime {
+          font-size: 0.7em;
+          margin: 0;
+          margin: 5px;
         }
       `}</style>
     </>
