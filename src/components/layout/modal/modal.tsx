@@ -4,7 +4,7 @@ interface props {
   modalOpen: boolean
   toggleModalOpenStatus: () => void
   backgroundToggle?: boolean
-  children: ReactNode
+  children?: ReactNode
 }
 
 const Modal = ({
@@ -20,6 +20,7 @@ const Modal = ({
       {modalOpen && (
         <div
           className="modalBackground"
+          data-testid="modalBackground"
           ref={backgroundRef}
           onClick={(event) => {
             if (backgroundToggle && backgroundRef.current === event.target) {
@@ -30,6 +31,7 @@ const Modal = ({
           {children}
         </div>
       )}
+
       <style jsx>{`
         .modalBackground {
           position: absolute;

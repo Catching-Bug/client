@@ -6,11 +6,11 @@ import { boardTypes } from '../components/utils/interface/boardType'
 export const useBoardList = () => {
   const router = useRouter()
 
-  const [townName, setTownName] = useState<string | string[]>()
+  const [townName, setTownName] = useState<string>('')
   const [boardList, setBoardList] = useState<boardTypes[] | []>([])
 
   useEffect(() => {
-    if (router.query) {
+    if (router.query.townName && typeof router.query.townName === 'string') {
       setTownName(router.query.townName)
     }
   }, [router.query])
@@ -23,7 +23,8 @@ export const useBoardList = () => {
 
   const handleBoardDatas = async () => {
     try {
-      const result = await getBoard()
+      // size, page 임시 0으로 처리
+      const result = await getBoard(townName, 0, 0)
 
       setBoardList(result.content.board)
     } catch (error) {
