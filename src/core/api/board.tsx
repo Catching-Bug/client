@@ -1,3 +1,4 @@
+import { commentPostTypes } from '../../components/utils/interface/commentPostTypes'
 import { authAxios } from './instance/authInstance'
 
 interface boardCreateTypes {
@@ -101,6 +102,20 @@ export const postCreateBoard = async ({
         content: content,
         latitude: latitude,
         longitude: longitude,
+      },
+    })
+
+    return data
+  } catch (error) {
+    console.log('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
+  }
+}
+
+export const postComment = async ({ boardId, comment }: commentPostTypes) => {
+  try {
+    const { data } = await authAxios.post(`/api/comment/${boardId}`, {
+      params: {
+        comment: comment,
       },
     })
 

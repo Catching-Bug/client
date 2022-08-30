@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { boardFetchDataTypes } from '../components/utils/interface/boardFetchDataTypes'
 import { getBoardOnce } from '../core/api/board'
 
 export const useBoardData = () => {
   const router = useRouter()
 
-  const [boardDatas, setBoardDatas] = useState<object>({})
+  const [boardDatas, setBoardDatas] = useState<
+    boardFetchDataTypes | undefined
+  >()
 
   const fetchBoardData = async (id: number) => {
     try {
@@ -22,7 +25,7 @@ export const useBoardData = () => {
       if (router.query && typeof router.query.id === 'string') {
         const result = await fetchBoardData(Number(router.query.id))
 
-        setBoardDatas(result?.content)
+        setBoardDatas(result)
       }
     }
 

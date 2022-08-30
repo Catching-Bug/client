@@ -169,8 +169,9 @@ export const mockingCustomOverlay = () => {
      * 게시글 조회
      */
     authMock.onGet('/api/board/1').reply(200, {
+      message: 'blah blah',
       content: {
-        id: '1',
+        id: 1,
         region: '서울',
         city: '강남구',
         town: '강남동',
@@ -180,20 +181,35 @@ export const mockingCustomOverlay = () => {
         roomContent: '내용',
         creatorNickname: '글쓴이',
         creatorId: '글쓴이 ID',
-        latitude: '33',
-        longitude: '127',
+        latitude: 35.812582832534915,
+        longitude: 128.51874462784275,
         status: 'WAITING' /*WAITING , MATCHED*/,
 
         employ: {
           //게시글이 waiting 상태의 경우 null값
-          employId: '15',
-          employerId: '1',
-          employeeId: '2',
+          employId: 15,
+          employerId: 1,
+          employeeId: 2,
           employeeNickname: '글쓴이',
           employerNickname: '피고용자',
         },
       },
     })
+
+    /**
+     *
+     */
+    authMock
+      .onPost('/api/comment/1', { params: { content: '댓글' } })
+      .reply(200, {
+        message: '댓글이 정상적으로 등록되었습니다.',
+        content: {
+          commentId: 1,
+          commentAt: '2022-09-01T12:12:12',
+          commenterNickname: '임시댓글자',
+          content: '댓글1입니다.',
+        },
+      })
 
     /**
      * 사용자 위치 등록
