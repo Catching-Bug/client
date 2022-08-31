@@ -1,21 +1,24 @@
 import Image from 'next/image'
-import { boardTypes } from '../../utils/interface/boardType'
+import { MouseEventHandler } from 'react'
+
+interface boardListType {
+  title: string
+  content: string
+  nickName: string
+  onClick: MouseEventHandler<HTMLButtonElement>
+}
 
 /**
  * 게시글 관련한 컴포넌트입니다
- * @param id primary key값
  * @param title board 제목
  * @param content board 내용
  * @param nickname board 작성자
+ * @param onClick 버튼 클릭 이벤트
  */
-const Board = ({ id, title, content, nickName }: boardTypes) => {
-  const handleToGoDetailBoard = () => {
-    // 보드 상세정보로 이동하는 함수
-  }
-
+const BoardList = ({ title, content, nickName, onClick }: boardListType) => {
   return (
     <>
-      <button type="button" onClick={handleToGoDetailBoard}>
+      <button type="button" onClick={onClick}>
         <div className="boardConatiner">
           <div className="image">
             <Image
@@ -103,4 +106,4 @@ const Board = ({ id, title, content, nickName }: boardTypes) => {
   )
 }
 
-export default Board
+export default BoardList

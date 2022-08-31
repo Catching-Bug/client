@@ -58,7 +58,7 @@ export const getTownsCount = async (cityName: string) => {
  * @param townName 검색할 위치의 동 단위 이름
  * @returns 동 단위로 검색한 게시글들을 반환합니다
  */
-export const getBoard = async (
+export const getBoardList = async (
   townName: string,
   size: number,
   page: number,
@@ -67,6 +67,21 @@ export const getBoard = async (
     const { data } = await authAxios.get('/api/boards', {
       params: { townName: townName, size: size, page: page },
     })
+
+    return data
+  } catch (error) {
+    console.log('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
+  }
+}
+
+/**
+ * GET : 게시글에 대한 정보를 받아옵니다.
+ * @param id board primary key
+ * @returns data 게시글 정보
+ */
+export const getBoardOnce = async (id: number) => {
+  try {
+    const { data } = await authAxios.get(`/api/board/${id}`)
 
     return data
   } catch (error) {

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { getBoard } from '../core/api/board'
+import { getBoardList } from '../core/api/board'
 import { boardTypes } from '../components/utils/interface/boardType'
 
 export const useBoardList = () => {
@@ -10,7 +10,7 @@ export const useBoardList = () => {
   const [boardList, setBoardList] = useState<boardTypes[] | []>([])
 
   useEffect(() => {
-    if (router.query.townName && typeof router.query.townName === 'string') {
+    if (router.query && typeof router.query.townName === 'string') {
       setTownName(router.query.townName)
     }
   }, [router.query])
@@ -23,8 +23,7 @@ export const useBoardList = () => {
 
   const handleBoardDatas = async () => {
     try {
-      // size, page 임시 0으로 처리
-      const result = await getBoard(townName, 0, 0)
+      const result = await getBoardList(townName, 0, 0) // size,page 임시
 
       setBoardList(result.content.board)
     } catch (error) {
