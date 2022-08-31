@@ -58,6 +58,7 @@ export const getTownsCount = async (cityName: string) => {
  * @param townName 검색할 위치의 동 단위 이름
  * @returns 동 단위로 검색한 게시글들을 반환합니다
  */
+ 
 export const getBoardList = async (
   townName: string,
   size: number,

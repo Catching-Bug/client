@@ -7,9 +7,9 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-// 콜백 페이지 테스트
-describe('callback page', () => {
-  describe('getAuth function test', () => {
+/* 대제목 */
+describe('callback', () => {
+  describe('getAuth Function 테스트', () => {
     //given
     const getAuthorizationCode = jest.fn().mockImplementation(() => 'new code')
 
@@ -25,15 +25,17 @@ describe('callback page', () => {
       getAuthorizationCode.mockClear()
     })
 
-    it('get Auth Code', () => {
+    it('AuthCode가 제대로 실행되는지, 값은 제대로 받아오는지', () => {
+      //when
       getAuthorizationCode()
 
+      //then
       expect(getAuthorizationCode).toHaveBeenCalled()
       expect(getAuthorizationCode()).toBe('new code')
     })
   })
 
-  describe('when API call', () => {
+  describe('API 호출 테스트', () => {
     let mockAdapter: MockAdapter
 
     beforeEach(() => {
@@ -44,7 +46,7 @@ describe('callback page', () => {
       mockAdapter.reset()
     })
 
-    it('success case, need return tokens', async () => {
+    it('성공 케이스 => authcode가 제대로 확인됐는지, url은 맞는지', async () => {
       //given
       const code = {
         accessToken: 'accessToken',
@@ -65,7 +67,7 @@ describe('callback page', () => {
       expect(result).toEqual(code)
     })
 
-    it('fail case, return no datas', async () => {
+    it('실패 케이스 => 네트워크 에러로 result가 undefined로 호출되는지', async () => {
       //given
       mockAdapter
         .onGet('/api/login/oauth', { params: { code: 'authCode' } })
