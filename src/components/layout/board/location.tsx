@@ -18,12 +18,13 @@ const Location = (boardDatas: boardFetchDataTypes) => {
           <span className="adrressText">{`${boardDatas.content.region} ${
             boardDatas.content.city
           } ${boardDatas.content.town} ${
-            boardDatas.content.detailLoation
-              ? boardDatas.content.detailLoation
+            boardDatas.content.detailLocation
+              ? boardDatas.content.detailLocation
               : ''
           }`}</span>
         </div>
       </div>
+
       <style jsx>{`
         .locationContainer {
           width: 98%;

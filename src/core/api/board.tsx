@@ -1,4 +1,3 @@
-import { commentPostTypes } from '../../components/utils/interface/commentPostTypes'
 import { authAxios } from './instance/authInstance'
 
 interface boardCreateTypes {
@@ -75,6 +74,11 @@ export const getBoardList = async (
   }
 }
 
+/**
+ * GET : 게시글에 대한 정보를 받아옵니다.
+ * @param id board primary key
+ * @returns data 게시글 정보
+ */
 export const getBoardOnce = async (id: number) => {
   try {
     const { data } = await authAxios.get(`/api/board/${id}`)
@@ -102,20 +106,6 @@ export const postCreateBoard = async ({
         content: content,
         latitude: latitude,
         longitude: longitude,
-      },
-    })
-
-    return data
-  } catch (error) {
-    console.log('알 수 없는 오류가 발생했습니다. 관리자에게 문의해주세요.')
-  }
-}
-
-export const postComment = async ({ boardId, comment }: commentPostTypes) => {
-  try {
-    const { data } = await authAxios.post(`/api/comment/${boardId}`, {
-      params: {
-        comment: comment,
       },
     })
 

@@ -1,4 +1,4 @@
 export interface commentPostTypes {
   boardId: number
-  comment: string
+  myInputComment: string
 }

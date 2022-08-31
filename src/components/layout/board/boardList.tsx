@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { MouseEventHandler } from 'react'
+
 interface boardListType {
   title: string
   content: string

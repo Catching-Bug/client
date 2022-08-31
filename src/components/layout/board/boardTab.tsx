@@ -6,13 +6,25 @@ const BoardTab = ({ setMode }: boardTabTypes) => {
   return (
     <>
       <div className="tabContainer">
-        <button onClick={() => setMode('board')} type="button">
+        <button
+          onClick={() => setMode('board')}
+          type="button"
+          data-testid="boardButton"
+        >
           글
         </button>
-        <button onClick={() => setMode('location')} type="button">
+        <button
+          onClick={() => setMode('location')}
+          type="button"
+          data-testid="locationButton"
+        >
           위치
         </button>
-        <button onClick={() => setMode('match')} type="button">
+        <button
+          onClick={() => setMode('match')}
+          type="button"
+          data-testid="matchButton"
+        >
           매칭
         </button>
       </div>

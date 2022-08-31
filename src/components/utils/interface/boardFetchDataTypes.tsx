@@ -5,7 +5,7 @@ export interface boardFetchDataTypes {
     region: string
     city: string
     town: string
-    detailLoation: string
+    detailLocation: string
     createdTime: string
     roomTitle: string
     roomContent: string

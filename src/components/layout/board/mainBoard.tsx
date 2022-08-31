@@ -1,5 +1,8 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
-import { postComment } from '../../../core/api/board'
+import { MouseEvent, useEffect, useState } from 'react'
+import { getComments, postComment } from '../../../core/api/comment'
+import { commentFetchDataTypes } from '../../utils/interface/commentFetchDataTypes'
+import { commentInViewTypes } from '../../utils/interface/commentInViewTypes'
+
 import Button from '../button/button'
 import Body from './body'
 import Comment from './comment'
@@ -7,26 +10,56 @@ import Comment from './comment'
 let timer: NodeJS.Timeout
 
 const MainBoard = ({ boardId }: { boardId: number }) => {
-  const [comment, setComment] = useState<string>('')
+  const [myInputComment, setMyInputComment] = useState<string>('')
 
   const handleChangeInput = (value: string) => {
     if (timer) clearTimeout(timer)
 
     timer = setTimeout(() => {
-      setComment(value)
+      setMyInputComment(value)
     }, 100)
   }
 
   const handleAddComment = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault()
-      const result = await postComment({ boardId, comment })
+      const result = await postComment({ boardId, myInputComment })
 
-      console.log(result)
+      setCommentDetection(true)
     } catch (error) {
       console.log('handleAddComment 에러')
     }
   }
+
+  const [commentsInView, setCommentsInView] = useState<
+    commentInViewTypes[] | []
+  >([])
+
+  const [commentDetection, setCommentDetection] = useState<boolean>(true)
+
+  const fetchComments = async () => {
+    try {
+      const result: commentFetchDataTypes = await getComments(boardId)
+
+      handleCommentsInView(result)
+    } catch (error) {
+      console.log('fetchComments 에러')
+    }
+  }
+
+  const handleCommentsInView = (result: commentFetchDataTypes) => {
+    const comments: commentInViewTypes[] | [] = result.content.content
+
+    setCommentsInView(comments)
+  }
+
+  useEffect(() => {
+    if (commentDetection) {
+      fetchComments()
+
+      setCommentDetection(false)
+    }
+  }, [commentDetection])
 
   return (
     <>
@@ -39,12 +72,10 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
       </div>
 
       <div className="commentContainer">
-        <Comment></Comment>
-        <Comment></Comment>
-        <Comment></Comment>
-        <Comment></Comment>
-        <Comment></Comment>
-        <Comment></Comment>
+        {commentsInView.length &&
+          commentsInView.map((comment) => {
+            return <Comment key={comment.commentId} {...comment}></Comment>
+          })}
       </div>
 
       <div className="fixedCommentContainer">

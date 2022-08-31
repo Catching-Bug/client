@@ -196,20 +196,63 @@ export const mockingCustomOverlay = () => {
       },
     })
 
+    authMock.onGet('/api/comments/1').reply(200, {
+      message: '정상적으로 댓글을 조회했습니다.',
+      content: {
+        content: [
+          {
+            commentId: 1,
+            content: '댓글1',
+            commenterNickname: '작성자1',
+            commentedAt: '시간1',
+          },
+          {
+            commentId: 2,
+            content: '댓글2',
+            commenterNickname: '작성자2',
+            commentedAt: '시간2',
+          },
+        ],
+        pageable: {
+          sort: {
+            sorted: false,
+            unsorted: true,
+            empty: true,
+          },
+          pageNumber: 0,
+          pageSize: 20,
+          offset: 0,
+          paged: true,
+          unpaged: false,
+        },
+        totalPages: 0,
+        totalElements: 0,
+        last: true,
+        numberOfElements: 0,
+        sort: {
+          sorted: false,
+          unsorted: true,
+          empty: true,
+        },
+        size: 20,
+        number: 0,
+        first: true,
+        empty: true,
+      },
+    })
+
     /**
      *
      */
-    authMock
-      .onPost('/api/comment/1', { params: { content: '댓글' } })
-      .reply(200, {
-        message: '댓글이 정상적으로 등록되었습니다.',
-        content: {
-          commentId: 1,
-          commentAt: '2022-09-01T12:12:12',
-          commenterNickname: '임시댓글자',
-          content: '댓글1입니다.',
-        },
-      })
+    authMock.onPost('/api/comment/1').reply(200, {
+      message: '댓글이 정상적으로 등록되었습니다.',
+      content: {
+        commentId: 1,
+        commentAt: '2022-09-01T12:12:12',
+        commenterNickname: '임시댓글자',
+        content: '댓글1입니다.',
+      },
+    })
 
     /**
      * 사용자 위치 등록

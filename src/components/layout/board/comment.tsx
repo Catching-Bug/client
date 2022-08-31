@@ -1,12 +1,16 @@
-const Comment = () => {
+import { commentInViewTypes } from '../../utils/interface/commentInViewTypes'
+
+const Comment = ({
+  commentedAt,
+  commenterNickname,
+  content,
+}: commentInViewTypes) => {
   return (
     <>
       <div className="commentWrapper">
-        <p className="userBox">익명</p>
-        <p className="dateBox">2022.08.29</p>
-        <p className="commentBox">
-          ㅎㅇㅎㅇㅎㅎㅎㅎㅎㅎㅎㅇㅎㅇㅎㅎㅎㅎㅎㅎㅎㅇㅎㅇㅎㅎㅎㅎㅎㅎ
-        </p>
+        <p className="userBox">{commenterNickname}</p>
+        <p className="dateBox">{commentedAt}</p>
+        <p className="commentBox">{content}</p>
       </div>
       <hr />
 
