@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { mapAction } from '../components/utils/interface/mapActions'
 import { addCenterChangedEvent } from '../components/utils/map/addCenterChangedEvent'
+import { displayMarker } from '../components/utils/map/displayMarker'
 import { getCenterLocation } from '../components/utils/map/getCenterLocation'
 import { getMarker } from '../components/utils/map/getMarker'
 import { handleCustomOverlay } from '../components/utils/map/handleCustomOverlay'
@@ -11,9 +12,9 @@ import { RootState } from '../core/redux/module/rootReducer'
 export const useMapAction = ({
   showMyLocation,
   enableToGetMarker,
+  displayUserLocationMarker,
   address,
   getAroundUserBoard,
-  markerOnClick,
 }: mapAction) => {
   const dispatch = useDispatch()
 
@@ -31,6 +32,12 @@ export const useMapAction = ({
 
       if (enableToGetMarker)
         getMarker({ map, marker, geocoder, dispatch, address })
+
+      if (displayUserLocationMarker) {
+        const { latitude, longitude } = displayUserLocationMarker
+
+        displayMarker({ map, latitude, longitude })
+      }
 
       if (getAroundUserBoard) {
         addCenterChangedEvent(map, geocoder, dispatch)

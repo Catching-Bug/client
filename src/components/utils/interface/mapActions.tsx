@@ -11,8 +11,11 @@ import { ReactNode } from 'react'
 export interface mapAction {
   showMyLocation?: boolean
   enableToGetMarker?: boolean
+  displayUserLocationMarker?: {
+    latitude: number
+    longitude: number
+  }
   address?: boolean
   getAroundUserBoard?: boolean
-  markerOnClick?: () => void
   children?: ReactNode
 }
