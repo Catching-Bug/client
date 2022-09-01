@@ -10,6 +10,11 @@ import {
   saveCustomOverlays,
 } from '../../../core/redux/module/customOverlaySlice'
 
+interface boardFetchDatas {
+  message: string
+  content: boardContentType[]
+}
+
 interface boardContentType {
   regionName?: string
   cityName?: string
@@ -17,11 +22,6 @@ interface boardContentType {
   latitude: number
   longitude: number
   count: number
-}
-
-interface boardFetchDatas {
-  message: string
-  content: boardContentType[]
 }
 
 export const handleCustomOverlay = (
@@ -43,7 +43,7 @@ export const handleCustomOverlay = (
   }
 }
 
-const drawCustomOverlays = async (
+export const drawCustomOverlays = async (
   fetch: Promise<any>,
   dispatch: Dispatch<any>,
   map: any,
@@ -58,7 +58,7 @@ const drawCustomOverlays = async (
   }
 }
 
-const handleFetchData = (
+export const handleFetchData = (
   result: boardFetchDatas,
   dispatch: Dispatch<any>,
   map: any,
@@ -71,7 +71,7 @@ const handleFetchData = (
   dispatch(saveCustomOverlays({ customOverlay: overlays }))
 }
 
-const parseResultBoardInfo = (result: boardFetchDatas) => {
+export const parseResultBoardInfo = (result: boardFetchDatas) => {
   const overlays: object[] = []
   const latlon: object[] = []
 
@@ -98,7 +98,7 @@ const parseResultBoardInfo = (result: boardFetchDatas) => {
   return { overlays, latlon }
 }
 
-const addEventToOverlay = (
+export const addEventToOverlay = (
   overlays: object[],
   latlon: object[],
   map: any,
@@ -126,7 +126,11 @@ const addEventToOverlay = (
   })
 }
 
-const getContentDesign = (count: number, index: number, townName?: string) => {
+export const getContentDesign = (
+  count: number,
+  index: number,
+  townName?: string,
+) => {
   const getStyle = (width: number, height: number, color: string) => {
     return `
       <div 

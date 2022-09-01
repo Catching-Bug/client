@@ -1,4 +1,4 @@
-import centerLatLonSlice, { saveLatLon } from './centerLatLonSlice'
+import centerLatLonSlice, { saveLatLon } from '../centerLatLonSlice'
 
 describe('reducer', () => {
   describe('centerLatLon', () => {

@@ -1,18 +1,21 @@
 import { render } from '@testing-library/react'
 import { useSelector } from '../../../__mocks__/react-redux'
-import { getCenterLocation } from '../../utils/map/getCenterLocation'
 
 import Map from './map'
 
 jest.mock('react-redux')
-jest.mock('../../utils/map/getCenterLocation')
 
 describe('map 페이지', () => {
   useSelector.mockImplementation((selector) =>
     selector({
       kakaoMapSlice: {
-        map: 'map',
-        marker: 'marker',
+        map: {
+          setCenter: jest.fn(),
+          getCenter: jest.fn(),
+        },
+        marker: {
+          setMap: jest.fn(),
+        },
         geocoder: {
           coord2Address: jest.fn(),
         },

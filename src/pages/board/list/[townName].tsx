@@ -31,11 +31,12 @@ const List = () => {
         .listContainer {
           max-width: 768px;
           width: 100%;
-          height: 100%;
+          height: calc((var(--vh, 1vh) * 100));
           align-items: center;
           overflow-y: auto;
           overflow-x: hidden;
           position: absolute;
+          background-color: white;
         }
 
         .displayContainer {
@@ -44,7 +45,6 @@ const List = () => {
           height: 100%;
           display: flex;
           flex-direction: column;
-          background-color: white;
         }
       `}</style>
     </>
