@@ -1,12 +1,9 @@
 import Router from 'next/router'
 import { useState } from 'react'
 import BoardTab from '../../components/layout/board/boardTab'
-import Body from '../../components/layout/board/body'
-import Comment from '../../components/layout/board/comment'
 import Location from '../../components/layout/board/location'
 import MainBoard from '../../components/layout/board/mainBoard'
 import Match from '../../components/layout/board/match'
-import Button from '../../components/layout/button/button'
 import Header from '../../components/layout/header/header'
 import { useBoardData } from '../../hooks/useBoardData'
 

@@ -1,7 +1,7 @@
 import userInfoSlice, {
   saveBasicsOfUser,
   saveLocationOfUser,
-} from './userInfoSlice'
+} from '../userInfoSlice'
 
 describe('reducer', () => {
   describe('userInfo', () => {

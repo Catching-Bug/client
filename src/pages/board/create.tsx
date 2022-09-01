@@ -177,7 +177,7 @@ const Create = () => {
             ></input>
             <label htmlFor="detail">상세 주소를 입력해주세요.</label>
             <input
-              className="locationInput"
+              className="detailInput"
               id="detail"
               ref={detailInputRef}
             ></input>
@@ -192,7 +192,7 @@ const Create = () => {
         .boardContainer {
           max-width: 1024px;
           width: 100%;
-          height: 100%;
+          height: calc((var(--vh, 1vh) * 100));
           background-color: #faf9f7;
           display: flex;
           flex-direction: column;
@@ -248,8 +248,7 @@ const Create = () => {
           flex-direction: column;
           width: 100%;
           max-width: 640px;
-          height: 100%;
-          max-height: 700px;
+          height: calc((var(--vh, 1vh) * 100));
         }
 
         .modalHeaderBar {
@@ -273,6 +272,14 @@ const Create = () => {
         .locationInput {
           height: 30px;
           margin: 10px 0;
+          border: 1px solid grey;
+          background-color: #e9e8e8;
+        }
+
+        .detailInput {
+          height: 30px;
+          margin: 10px 0;
+          border: 1px solid grey;
           background-color: white;
         }
 

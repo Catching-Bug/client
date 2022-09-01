@@ -15,25 +15,34 @@ export const searchDetailAddr = ({
   searchDetailAddrFromCoords(
     mouseEventLatLng,
     geocoder,
-    function (result: any, status: any) {
-      if (status === window.kakao.maps.services.Status.OK) {
-        const detailLocation = result[0].address.address_name
-
-        dispatch(
-          saveLocation({
-            location: detailLocation,
-            latitude: mouseEventLatLng.Ma,
-            longitude: mouseEventLatLng.La,
-          }),
-        )
-
-        return detailLocation
-      }
+    (result: any, status: any) => {
+      handleDetailLocation(result, status, dispatch, mouseEventLatLng)
     },
   )
 }
 
-const searchDetailAddrFromCoords = (
+export const handleDetailLocation = (
+  result: any,
+  status: any,
+  dispatch: Dispatch<any>,
+  mouseEventLatLng: any,
+) => {
+  if (status === window.kakao.maps.services.Status.OK) {
+    const detailLocation = result[0].address.address_name
+
+    dispatch(
+      saveLocation({
+        location: detailLocation,
+        latitude: mouseEventLatLng.Ma,
+        longitude: mouseEventLatLng.La,
+      }),
+    )
+
+    return detailLocation
+  }
+}
+
+export const searchDetailAddrFromCoords = (
   coords: any,
   geocoder: any,
   callback: any,

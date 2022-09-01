@@ -1,4 +1,4 @@
-import locationSlice, { saveLocation } from './locationSlice'
+import locationSlice, { saveLocation } from '../locationSlice'
 
 describe('reducer', () => {
   describe('locationSlice', () => {

@@ -1,4 +1,4 @@
-import modalOpenSlice, { saveModalOpen } from './modalOpenSlice'
+import modalOpenSlice, { saveModalOpen } from '../modalOpenSlice'
 
 describe('reducer', () => {
   describe('modalOpen', () => {

@@ -212,6 +212,18 @@ export const mockingCustomOverlay = () => {
             commenterNickname: '작성자2',
             commentedAt: '시간2',
           },
+          {
+            commentId: 3,
+            content: '댓글3',
+            commenterNickname: '작성자3',
+            commentedAt: '시간3',
+          },
+          {
+            commentId: 4,
+            content: '댓글4',
+            commenterNickname: '작성자4',
+            commentedAt: '시간4',
+          },
         ],
         pageable: {
           sort: {

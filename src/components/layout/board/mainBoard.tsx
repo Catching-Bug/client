@@ -85,6 +85,7 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
             handleChangeInput(event.target.value)
           }}
         ></input>
+
         <Button
           onClick={(event) => {
             handleAddComment(event)
