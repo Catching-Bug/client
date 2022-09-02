@@ -1,4 +1,4 @@
-import markerSlice, { saveMarker } from './markerSlice'
+import markerSlice, { saveMarker } from '../markerSlice'
 
 describe('reducer', () => {
   describe('marker', () => {

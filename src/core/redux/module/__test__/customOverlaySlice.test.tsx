@@ -2,7 +2,7 @@ import customOverlaySlice, {
   changeCenterLocation,
   changeOverlayDeleteDetection,
   saveCustomOverlays,
-} from './customOverlaySlice'
+} from '../customOverlaySlice'
 
 describe('reducer', () => {
   describe('customOverlay', () => {

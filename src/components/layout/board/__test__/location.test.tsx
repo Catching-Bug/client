@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { useSelector } from '../../../../__mocks__/react-redux'
 import { boardFetchDataTypes } from '../../../utils/interface/boardFetchDataTypes'
@@ -72,6 +73,6 @@ describe('location component 테스트', () => {
   it('rendering 테스트', () => {
     const { container } = render(<Location {...mockBoardFetchDatas}></Location>)
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 })

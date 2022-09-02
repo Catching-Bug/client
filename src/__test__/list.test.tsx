@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { useRouter } from 'next/router'
 import { render } from '@testing-library/react'
 import List from '../pages/board/list/[townName]'
@@ -27,7 +28,7 @@ describe('[townName] 페이지 테스트', () => {
     it('List 컴포넌트 render가 제대로 되는가?', () => {
       const { container } = render(<List></List>)
 
-      expect(container).toBeInTheDocument
+      expect(container).toBeInTheDocument()
     })
   })
 
@@ -83,18 +84,6 @@ describe('[townName] 페이지 테스트', () => {
       expect(result).toEqual(code)
     })
 
-    // it('Region 단위 요청 api 실패', async () => {
-    //   //given
-    //   mockAdapter.onGet('/api/regions/count').networkErrorOnce()
-
-    //   //when
-    //   const result = await getRegionCount()
-
-    //   //then
-    //   expect(mockAdapter.history.get[0].url).toEqual('/api/regions/count')
-    //   expect(result).toEqual(undefined)
-    // })
-
     it('City 단위 요청 api 성공', async () => {
       //given
       const code = {
@@ -132,20 +121,6 @@ describe('[townName] 페이지 테스트', () => {
       expect(result).toEqual(code)
     })
 
-    // it('City 단위 요청 api 실패', async () => {
-    //   //given
-    //   mockAdapter
-    //     .onGet('/api/cities/count', { params: { regionName: '서울' } })
-    //     .networkErrorOnce()
-
-    //   //when
-    //   const result = await getCitiesCount('서울')
-
-    //   //then
-    //   expect(mockAdapter.history.get[0].url).toEqual('/api/cities/count')
-    //   expect(result).toEqual(undefined)
-    // })
-
     it('Town 단위 요청 api 성공', async () => {
       //given
       const code = {
@@ -182,19 +157,5 @@ describe('[townName] 페이지 테스트', () => {
       expect(mockAdapter.history.get[0].url).toEqual('/api/towns/count')
       expect(result).toEqual(code)
     })
-
-    // it('Town 단위 요청 api 실패', async () => {
-    //   //given
-    //   mockAdapter
-    //     .onGet('/api/towns/count', { params: { cityName: '남구' } })
-    //     .networkErrorOnce()
-
-    //   //when
-    //   const result = await getTownsCount('남구')
-
-    //   //then
-    //   expect(mockAdapter.history.get[0].url).toEqual('/api/towns/count')
-    //   expect(result).toEqual(undefined)
-    // })
   })
 })

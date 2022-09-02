@@ -85,6 +85,7 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
             handleChangeInput(event.target.value)
           }}
         ></input>
+
         <Button
           onClick={(event) => {
             handleAddComment(event)
@@ -133,6 +134,7 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
           padding: 0 10px;
           border-radius: 8px;
           border: 1px solid rgb(0, 0, 0, 0.5);
+          background-color: white;
         }
       `}</style>
     </>

@@ -1,18 +1,22 @@
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { useSelector } from '../../../__mocks__/react-redux'
-import { getCenterLocation } from '../../utils/map/getCenterLocation'
 
 import Map from './map'
 
 jest.mock('react-redux')
-jest.mock('../../utils/map/getCenterLocation')
 
 describe('map 페이지', () => {
   useSelector.mockImplementation((selector) =>
     selector({
       kakaoMapSlice: {
-        map: 'map',
-        marker: 'marker',
+        map: {
+          setCenter: jest.fn(),
+          getCenter: jest.fn(),
+        },
+        marker: {
+          setMap: jest.fn(),
+        },
         geocoder: {
           coord2Address: jest.fn(),
         },
@@ -49,7 +53,7 @@ describe('map 페이지', () => {
   it('map 옵션 없이 render 테스트', () => {
     const { container } = render(<Map></Map>)
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 
   it('map 옵션 있을 때 테스트', () => {
@@ -57,6 +61,6 @@ describe('map 페이지', () => {
       <Map showMyLocation getAroundUserBoard address enableToGetMarker></Map>,
     )
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 })

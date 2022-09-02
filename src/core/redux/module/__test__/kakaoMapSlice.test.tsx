@@ -1,4 +1,4 @@
-import kakaoMapSlice, { saveMapObject } from './kakaoMapSlice'
+import kakaoMapSlice, { saveMapObject } from '../kakaoMapSlice'
 
 describe('reducer', () => {
   describe('kakaoMap', () => {

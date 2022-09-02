@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import Button from './button'
 
@@ -10,8 +11,8 @@ describe('버튼이 원하는 대로 동작할까?', () => {
     const { container } = render(<Button></Button>)
     const button = screen.getByRole('button')
 
-    expect(container).toBeInTheDocument
-    expect(button).toBeInTheDocument
+    expect(container).toBeInTheDocument()
+    expect(button).toBeInTheDocument()
   })
 
   it('버튼에 onClick이 제대로 call 되는가?', () => {
@@ -20,8 +21,8 @@ describe('버튼이 원하는 대로 동작할까?', () => {
 
     fireEvent.click(button)
 
-    expect(container).toBeInTheDocument
-    expect(button).toBeInTheDocument
+    expect(container).toBeInTheDocument()
+    expect(button).toBeInTheDocument()
     expect(onClickFn).toBeCalledTimes(1)
     expect(onClickFn()).toBe('click')
   })

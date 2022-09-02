@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import Header from './header'
 
@@ -9,7 +10,7 @@ describe('헤더 동작 테스트', () => {
   it('헤더에 렌더링 되는가?', () => {
     const { container } = render(<Header></Header>)
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 
   it('헤더에 onClick이 제대로 call 되는가?', () => {
@@ -18,8 +19,8 @@ describe('헤더 동작 테스트', () => {
 
     fireEvent.click(button)
 
-    expect(container).toBeInTheDocument
-    expect(button).toBeInTheDocument
+    expect(container).toBeInTheDocument()
+    expect(button).toBeInTheDocument()
     expect(onClickFn).toBeCalledTimes(1)
     expect(onClickFn()).toBe('click')
   })
@@ -28,7 +29,7 @@ describe('헤더 동작 테스트', () => {
     const { container } = render(<Header title={'testTitle'}></Header>)
     const title = screen.getByText('testTitle')
 
-    expect(container).toBeInTheDocument
-    expect(title).toBeInTheDocument
+    expect(container).toBeInTheDocument()
+    expect(title).toBeInTheDocument()
   })
 })

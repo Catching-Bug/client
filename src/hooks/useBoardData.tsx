@@ -1,14 +1,17 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { boardFetchDataTypes } from '../components/utils/interface/boardFetchDataTypes'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { getBoardOnce } from '../core/api/board'
+import { saveBoardDatas } from '../core/redux/module/boardDatasSlice'
+import { RootState } from '../core/redux/module/rootReducer'
 
 export const useBoardData = () => {
+  const dispatch = useDispatch()
   const router = useRouter()
 
-  const [boardDatas, setBoardDatas] = useState<
-    boardFetchDataTypes | undefined
-  >()
+  const { boardDatas } = useSelector(
+    (state: RootState) => state.boardDatasSlice,
+  )
 
   const fetchBoardData = async (id: number) => {
     try {
@@ -25,7 +28,7 @@ export const useBoardData = () => {
       if (router.query && typeof router.query.id === 'string') {
         const result = await fetchBoardData(Number(router.query.id))
 
-        setBoardDatas(result)
+        dispatch(saveBoardDatas(result))
       }
     }
 

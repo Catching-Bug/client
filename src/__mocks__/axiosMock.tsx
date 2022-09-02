@@ -212,6 +212,30 @@ export const mockingCustomOverlay = () => {
             commenterNickname: '작성자2',
             commentedAt: '시간2',
           },
+          {
+            commentId: 3,
+            content: '댓글3',
+            commenterNickname: '작성자3',
+            commentedAt: '시간3',
+          },
+          {
+            commentId: 4,
+            content: '댓글4',
+            commenterNickname: '작성자4',
+            commentedAt: '시간4',
+          },
+          {
+            commentId: 5,
+            content: '댓글3',
+            commenterNickname: '작성자3',
+            commentedAt: '시간3',
+          },
+          {
+            commentId: 6,
+            content: '댓글4',
+            commenterNickname: '작성자4',
+            commentedAt: '시간4',
+          },
         ],
         pageable: {
           sort: {
@@ -251,6 +275,19 @@ export const mockingCustomOverlay = () => {
         commentAt: '2022-09-01T12:12:12',
         commenterNickname: '임시댓글자',
         content: '댓글1입니다.',
+      },
+    })
+
+    authMock.onPost('/api/employ/1').reply(200, {
+      message: '',
+      content: {
+        employ: {
+          employId: 1,
+          employerId: 1,
+          employeeId: 2,
+          employeeNickname: '매칭자',
+          employerNickname: '피매칭자',
+        },
       },
     })
 
