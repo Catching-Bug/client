@@ -24,16 +24,21 @@ const Board = () => {
 
         <BoardTab setMode={setTabMode}></BoardTab>
 
-        {(tabMode === 'board' || tabMode === undefined) &&
-          boardDatas?.content && (
-            <MainBoard boardId={Number(boardDatas.content.id)} />
-          )}
+        {(tabMode === 'board' || tabMode === undefined) && boardDatas && (
+          <MainBoard boardId={Number(boardDatas.content.id)} />
+        )}
 
         {tabMode === 'location' && boardDatas?.content && (
           <Location {...boardDatas}></Location>
         )}
 
-        {tabMode === 'match' && <Match />}
+        {tabMode === 'match' && boardDatas?.content && (
+          <Match
+            boardId={boardDatas.content.id}
+            employInfo={boardDatas?.content?.employ}
+            isMatch={boardDatas?.content?.status}
+          />
+        )}
       </div>
 
       <style jsx>{`

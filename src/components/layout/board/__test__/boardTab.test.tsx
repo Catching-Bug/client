@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import BoardTab from '../boardTab'
 
@@ -10,7 +11,7 @@ describe('boardTab layout 테스트', () => {
   it('render 테스트', () => {
     const { container } = render(<BoardTab setMode={setMode}></BoardTab>)
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 
   it('location 버튼 클릭 시 제대로 mode가 변하는가?', () => {
@@ -18,7 +19,7 @@ describe('boardTab layout 테스트', () => {
 
     const locationButton = screen.getByTestId('locationButton')
 
-    expect(locationButton).toBeInTheDocument
+    expect(locationButton).toBeInTheDocument()
 
     // location 버튼 클릭
     fireEvent.click(locationButton)
@@ -32,7 +33,7 @@ describe('boardTab layout 테스트', () => {
 
     const matchButton = screen.getByTestId('matchButton')
 
-    expect(matchButton).toBeInTheDocument
+    expect(matchButton).toBeInTheDocument()
 
     // match 버튼 클릭
     fireEvent.click(matchButton)
@@ -46,7 +47,7 @@ describe('boardTab layout 테스트', () => {
 
     const boardButton = screen.getByTestId('boardButton')
 
-    expect(boardButton).toBeInTheDocument
+    expect(boardButton).toBeInTheDocument()
 
     // board 버튼 클릭
     fireEvent.click(boardButton)

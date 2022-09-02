@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { useSelector } from '../../../__mocks__/react-redux'
 import ModalBottomSheet from './bottomSheet'
@@ -26,7 +27,7 @@ describe('모달바텀시트 동작 확인', () => {
     fireEvent.click(screen.getByTestId('closeBtn'))
 
     //then
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
     expect(handleClick).toBeCalledTimes(1)
   })
 })

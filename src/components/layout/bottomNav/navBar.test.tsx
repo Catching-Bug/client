@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import NavBar from './navBar'
 
@@ -6,6 +7,6 @@ describe('navBar test', () => {
     //given
     const { container } = render(<NavBar />)
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 })
