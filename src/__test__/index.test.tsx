@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Home from '../pages'
 import { useSelector } from '../__mocks__/react-redux'
 
@@ -36,6 +37,6 @@ describe('지도 페이지(기본 페이지) 테스트', () => {
     const { container } = render(<Home></Home>)
 
     //then
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 })

@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import BoardList from '../boardList'
 
@@ -17,7 +18,7 @@ describe('boardList layout 테스트', () => {
       ></BoardList>,
     )
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 
   it('버튼이 원하는 대로 동작하는가', () => {
@@ -34,7 +35,7 @@ describe('boardList layout 테스트', () => {
 
     fireEvent.click(button)
 
-    expect(button).toBeInTheDocument
+    expect(button).toBeInTheDocument()
     expect(onClick).toBeCalledTimes(1)
 
     expect(onClick()).toBe('clickEvent')

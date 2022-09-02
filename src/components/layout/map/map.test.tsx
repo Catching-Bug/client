@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { useSelector } from '../../../__mocks__/react-redux'
 
@@ -52,7 +53,7 @@ describe('map 페이지', () => {
   it('map 옵션 없이 render 테스트', () => {
     const { container } = render(<Map></Map>)
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 
   it('map 옵션 있을 때 테스트', () => {
@@ -60,6 +61,6 @@ describe('map 페이지', () => {
       <Map showMyLocation getAroundUserBoard address enableToGetMarker></Map>,
     )
 
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
   })
 })

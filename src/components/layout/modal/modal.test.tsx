@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import Modal from './modal'
 
@@ -20,7 +21,7 @@ describe('modal 페이지', () => {
     )
 
     //then
-    expect(container).toBeInTheDocument
+    expect(container).toBeInTheDocument()
     expect(modalOpen).toBe(false)
   })
 
@@ -41,7 +42,7 @@ describe('modal 페이지', () => {
     const modalBackgroundDiv = screen.getByTestId('modalBackground')
 
     //then
-    expect(modalBackgroundDiv).toBeInTheDocument
+    expect(modalBackgroundDiv).toBeInTheDocument()
     expect(toggleModalOpenStatus).toBeCalledTimes(1)
     expect(modalOpen).toBe(true)
   })
@@ -64,7 +65,7 @@ describe('modal 페이지', () => {
     fireEvent.click(modalBackgroundDiv)
 
     //then
-    expect(modalBackgroundDiv).toBeInTheDocument
+    expect(modalBackgroundDiv).toBeInTheDocument()
     expect(modalOpen).toBe(false)
   })
 })
