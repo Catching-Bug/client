@@ -12,12 +12,12 @@ const Comment = ({
         <p className="dateBox">{commentedAt}</p>
         <p className="commentBox">{content}</p>
       </div>
-      <hr />
 
       <style jsx>{`
         .commentWrapper {
           width: 100%;
           /* background-color: white; */
+          border-bottom: 1px solid lightgray;
         }
 
         .userBox {
