@@ -7,6 +7,7 @@ import markerSlice from './markerSlice'
 import locationSlice from './locationSlice'
 import customOverlaySlice from './customOverlaySlice'
 import boardDatasSlice from './boardDatasSlice'
+import loginStatusSlice from './loginStatusSlice'
 
 const rootReducer = combineReducers({
   kakaoMapSlice,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   locationSlice,
   customOverlaySlice,
   boardDatasSlice,
+  loginStatusSlice,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

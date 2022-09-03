@@ -11,6 +11,9 @@ declare global {
   }
 }
 
+/**
+ * API 모킹용 배포 시 주석 또는 삭제
+ */
 mockingCustomOverlay()
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -1,7 +1,9 @@
-import { MouseEvent, useEffect, useState } from 'react'
-import { getComments, postComment } from '../../../core/api/comment'
-import { commentFetchDataTypes } from '../../utils/interface/commentFetchDataTypes'
-import { commentInViewTypes } from '../../utils/interface/commentInViewTypes'
+import { ChangeEvent, MouseEvent, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { postComment } from '../../../core/api/comment'
+import { RootState } from '../../../core/redux/module/rootReducer'
+import { useCommentInView } from '../../../hooks/useCommentInView'
+import { handleNotLoginExecption } from '../../utils/login/handleNotLoginException'
 
 import Button from '../button/button'
 import Body from './body'
@@ -10,56 +12,45 @@ import Comment from './comment'
 let timer: NodeJS.Timeout
 
 const MainBoard = ({ boardId }: { boardId: number }) => {
+  const { loginStatus } = useSelector(
+    (state: RootState) => state.loginStatusSlice,
+  )
+
+  // 입력하고있는 comment value
   const [myInputComment, setMyInputComment] = useState<string>('')
 
-  const handleChangeInput = (value: string) => {
+  /**
+   * onChange Event를 통해 Input 값을 갱신합니다
+   * @param event onChange Event
+   */
+  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     if (timer) clearTimeout(timer)
 
     timer = setTimeout(() => {
-      setMyInputComment(value)
+      setMyInputComment(event.target.value)
     }, 100)
   }
 
+  // comment를 입력하는 input Element Ref
+  const commentInputRef = useRef<HTMLInputElement>(null)
+
+  // 현재 fetch해 온 댓글 리스트 및 내가 코멘트를 달았는지 확인하기 위한 SetState
+  const { commentsInView, setCommentDetection } = useCommentInView(boardId)
+
   const handleAddComment = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
+      if (!handleNotLoginExecption(loginStatus)) return
+
       event.preventDefault()
       const result = await postComment({ boardId, myInputComment })
+
+      if (commentInputRef.current) commentInputRef.current.value = ''
 
       setCommentDetection(true)
     } catch (error) {
       console.log('handleAddComment 에러')
     }
   }
-
-  const [commentsInView, setCommentsInView] = useState<
-    commentInViewTypes[] | []
-  >([])
-
-  const [commentDetection, setCommentDetection] = useState<boolean>(true)
-
-  const fetchComments = async () => {
-    try {
-      const result: commentFetchDataTypes = await getComments(boardId)
-
-      handleCommentsInView(result)
-    } catch (error) {
-      console.log('fetchComments 에러')
-    }
-  }
-
-  const handleCommentsInView = (result: commentFetchDataTypes) => {
-    const comments: commentInViewTypes[] | [] = result.content.content
-
-    setCommentsInView(comments)
-  }
-
-  useEffect(() => {
-    if (commentDetection) {
-      fetchComments()
-
-      setCommentDetection(false)
-    }
-  }, [commentDetection])
 
   return (
     <>
@@ -81,8 +72,10 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
       <div className="fixedCommentContainer">
         <input
           className="commentInput"
+          type={'text'}
+          ref={commentInputRef}
           onChange={(event) => {
-            handleChangeInput(event.target.value)
+            handleChangeInput(event)
           }}
         ></input>
 

@@ -1,10 +1,16 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Loading from '../../components/layout/loading/loading'
 import { getAuthLogin } from '../../core/api/user'
+import {
+  saveLoginStatus,
+  saveLoginUserInfo,
+} from '../../core/redux/module/loginStatusSlice'
 
 const Callback = () => {
   const router = useRouter()
+  const dispatch = useDispatch()
 
   /**
    * url query param의 code를 가져옵니다.
@@ -25,15 +31,24 @@ const Callback = () => {
     try {
       const authCode = getAuthorizationCode()
 
-      // const result = await getAuthLogin({ code: 'code' })
       const result = await getAuthLogin(authCode)
 
       localStorage.setItem('uat', result.accessToken)
       localStorage.setItem('urt', result.refreshToken)
 
+      dispatch(saveLoginStatus({ loginStatus: true }))
+      dispatch(
+        saveLoginUserInfo({
+          loginUserInfo: {
+            gender: result.gender,
+            nickName: result.nickName,
+          },
+        }),
+      )
+
       router.replace('/')
     } catch (error) {
-      console.log(error)
+      console.log('callback login error')
       router.replace('/')
     }
   }

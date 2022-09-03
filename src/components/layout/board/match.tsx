@@ -1,9 +1,6 @@
-import { useDispatch } from 'react-redux'
-import { postMatching } from '../../../core/api/employ'
-import {
-  saveEmployDatas,
-  saveIsMatched,
-} from '../../../core/redux/module/boardDatasSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../core/redux/module/rootReducer'
+import { handleMatchTrial } from '../../utils/match/handleMatchTrial'
 
 interface matchTypes {
   boardId: number
@@ -20,16 +17,9 @@ interface matchTypes {
 const Match = ({ boardId, employInfo, isMatch }: matchTypes) => {
   const dispatch = useDispatch()
 
-  const handleMatchTrial = async (boardId: number) => {
-    try {
-      const result = await postMatching(boardId)
-
-      dispatch(saveEmployDatas(result.content.employ))
-      dispatch(saveIsMatched({ isMatched: 'MATCHED' }))
-    } catch (error) {
-      console.log('handleMatchTrial 오류 발생')
-    }
-  }
+  const { loginStatus } = useSelector(
+    (state: RootState) => state.loginStatusSlice,
+  )
 
   return (
     <>
@@ -48,7 +38,7 @@ const Match = ({ boardId, employInfo, isMatch }: matchTypes) => {
               className="helpButton"
               type="button"
               onClick={() => {
-                handleMatchTrial(boardId)
+                handleMatchTrial(boardId, loginStatus, dispatch)
               }}
             >
               {employInfo.employeeNickname}님 도와주기
