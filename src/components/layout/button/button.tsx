@@ -22,7 +22,7 @@ const Button = ({ className, onClick, children }: props) => {
         .centerMoveBtn {
           position: absolute;
           right: 10px;
-          bottom: 100px;
+          bottom: 200px;
           z-index: 9998;
           width: 40px;
           height: 40px;

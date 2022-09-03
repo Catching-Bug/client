@@ -1,15 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import NavBar from '../components/layout/bottomNav/navBar'
 import Button from '../components/layout/button/button'
+import { RootState } from '../core/redux/module/rootReducer'
 
 const Main = () => {
-  const [loginStatus, setLoginStatus] = useState(false)
-
-  // const changeLoginStatus = () => {
-  //   setLoginStatus(!loginStatus)
-  // }
+  const { loginStatus, loginUserInfo } = useSelector(
+    (state: RootState) => state.loginStatusSlice,
+  )
 
   return (
     <>
@@ -26,7 +25,9 @@ const Main = () => {
           </span>
         </h1>
         <h2>벌레를 대신 잡아줄 사람이 필요하세요?</h2>
-        {loginStatus ? null : (
+        {loginStatus ? (
+          <span>{`${loginUserInfo?.nickName}님 안녕하세요`}</span>
+        ) : (
           <Link href={process.env.NEXT_PUBLIC_KAKAO_LOGIN}>
             <a>
               <Button className="loginButtonContainer">

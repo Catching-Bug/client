@@ -13,14 +13,12 @@ export const mockingCustomOverlay = () => {
     /**
      * 로그인 요청 조회
      */
-    defaultMock
-      .onGet('/api/login/oauth', { params: { code: 'code' } })
-      .reply(200, {
-        accessToken: 'accessToken',
-        refreshToken: 'refreshToken',
-        gender: 'male',
-        nickName: 'nickname',
-      })
+    defaultMock.onGet('/api/login/oauth').reply(200, {
+      accessToken: 'accessToken',
+      refreshToken: 'refreshToken',
+      gender: 'male',
+      nickName: 'nickname',
+    })
 
     /**
      * 사용자 위치 전부 조회
