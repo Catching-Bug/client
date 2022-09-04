@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import NavBar from '../components/layout/bottomNav/navBar'
 import Button from '../components/layout/button/button'
@@ -9,6 +10,13 @@ const Main = () => {
   const { loginStatus, loginUserInfo } = useSelector(
     (state: RootState) => state.loginStatusSlice,
   )
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+  }, [])
 
   return (
     <>

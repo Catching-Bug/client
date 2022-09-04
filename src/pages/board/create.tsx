@@ -11,6 +11,9 @@ import Modal from '../../components/layout/modal/modal'
 import { useLocation } from '../../hooks/useLocation'
 import { postCreateBoard } from '../../core/api/board'
 
+let vh = window.innerHeight * 0.01
+document.documentElement.style.setProperty('--vh', `${vh}px`)
+
 const Create = () => {
   const router = useRouter()
 

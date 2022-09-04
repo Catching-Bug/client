@@ -31,6 +31,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>캐치버그</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1"
+        />
       </Head>
       <div className="middleContainer">
         <Component {...pageProps} />

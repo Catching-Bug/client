@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BoardTab from '../../components/layout/board/boardTab'
 import Location from '../../components/layout/board/location'
 import MainBoard from '../../components/layout/board/mainBoard'
@@ -12,6 +12,13 @@ const Board = () => {
   const [tabMode, setTabMode] = useState<string>('board')
 
   const { boardDatas } = useBoardData()
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+  }, [])
 
   return (
     <>
