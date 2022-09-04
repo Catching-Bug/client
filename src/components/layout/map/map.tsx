@@ -21,6 +21,13 @@ const Map = (props: mapAction) => {
     onLoadKakaoMap()
   }, [mapLoaded])
 
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+  }, [])
+
   return (
     <>
       <div className="MapContainer" id="map">

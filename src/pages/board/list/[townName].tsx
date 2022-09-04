@@ -1,4 +1,5 @@
 import Router from 'next/router'
+import { useEffect } from 'react'
 import BoardList from '../../../components/layout/board/boardList'
 import Header from '../../../components/layout/header/header'
 import { boardTypes } from '../../../components/utils/interface/boardType'
@@ -6,6 +7,13 @@ import { useBoardList } from '../../../hooks/useBoardList'
 
 const List = () => {
   const { boardList } = useBoardList()
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+  }, [])
 
   return (
     <>
