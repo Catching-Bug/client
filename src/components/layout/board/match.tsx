@@ -72,7 +72,6 @@ const Match = ({ boardId, employInfo, isMatch }: matchTypes) => {
         }
 
         .helpButton {
-          width: 150px;
           height: 30px;
           border-radius: 20px;
           border: 1px solid black;

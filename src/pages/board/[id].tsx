@@ -32,7 +32,7 @@ const Board = () => {
         <BoardTab setMode={setTabMode}></BoardTab>
 
         {(tabMode === 'board' || tabMode === undefined) && boardDatas && (
-          <MainBoard boardId={Number(boardDatas.content.id)} />
+          <MainBoard {...boardDatas} />
         )}
 
         {tabMode === 'location' && boardDatas?.content && (

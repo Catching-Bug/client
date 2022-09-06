@@ -2,35 +2,13 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { useSelector } from '../../../../__mocks__/react-redux'
 import MainBoard from '../mainBoard'
+import { mockBoardFetchDatas } from './boardFetchDataMock'
 
 jest.mock('react-redux')
 
-// import * as customHook from '../../../../hooks/useCommentInView'
-
-// jest.mock('../../../../hooks/useCommentInView', () => ({
-//   ...jest.requireActual('../../../../hooks/useCommentInView'),
-//   useCommentInView: jest.fn().mockImplementation(() => {
-//     return {
-//       commentsInView: [
-//         {
-//           commentId: 1,
-//           commentedAt: 'At',
-//           commenterNickname: '닉네임',
-//           content: '내용',
-//         },
-//         {
-//           commentId: 2,
-//           commentedAt: 'At2',
-//           commenterNickname: '닉네임2',
-//           content: '내용2',
-//         },
-//       ],
-//       setCommentDetection: jest.fn(),
-//     }
-//   }),
-// }))
-
 describe('mainBoard component 테스트', () => {
+  mockBoardFetchDatas
+
   useSelector.mockImplementation((selector) =>
     selector({
       loginStatusSlice: {
@@ -40,15 +18,17 @@ describe('mainBoard component 테스트', () => {
   )
 
   it('render 테스트', () => {
-    // customHook.useCommentInView(1)
-
-    const { container } = render(<MainBoard boardId={1}></MainBoard>)
+    const { container } = render(
+      <MainBoard {...mockBoardFetchDatas}></MainBoard>,
+    )
 
     expect(container).toBeInTheDocument()
   })
 
   it('input onchange 테스트', () => {
-    const { container } = render(<MainBoard boardId={1}></MainBoard>)
+    const { container } = render(
+      <MainBoard {...mockBoardFetchDatas}></MainBoard>,
+    )
 
     const input = screen.getByRole('textbox')
 
@@ -60,7 +40,9 @@ describe('mainBoard component 테스트', () => {
   })
 
   it('button click 테스트', () => {
-    const { container } = render(<MainBoard boardId={1}></MainBoard>)
+    const { container } = render(
+      <MainBoard {...mockBoardFetchDatas}></MainBoard>,
+    )
 
     const button = screen.getByRole('button')
 

@@ -2,18 +2,21 @@ interface boardBodyType {
   title: string
   content: string
   creatorNickname: string
+  createTime: string
 }
 
-const Body = ({ title, content, creatorNickname }: boardBodyType) => {
+const Body = ({
+  title,
+  content,
+  creatorNickname,
+  createTime,
+}: boardBodyType) => {
   return (
     <>
       <p className="creator">{creatorNickname}</p>
       <h1 className="title">{title}</h1>
       <p className="content">{content}</p>
-      <div className="additionalWrapper">
-        <p className="commentCounter">2</p>
-        <p className="createTime">2분 전</p>
-      </div>
+      <p className="createTime">{createTime}</p>
 
       <style jsx>{`
         .title {
@@ -33,12 +36,6 @@ const Body = ({ title, content, creatorNickname }: boardBodyType) => {
         .content {
           font-size: 1em;
           word-wrap: break-word;
-        }
-
-        .additionalWrapper {
-          width: 100%;
-          display: flex;
-          align-items: center;
         }
 
         .commentCounter {

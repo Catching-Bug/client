@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { postComment } from '../../../core/api/comment'
 import { RootState } from '../../../core/redux/module/rootReducer'
 import { useCommentInView } from '../../../hooks/useCommentInView'
+import { boardFetchDataTypes } from '../../utils/interface/boardFetchDataTypes'
 import { handleNotLoginExecption } from '../../utils/login/handleNotLoginException'
 
 import Button from '../button/button'
@@ -11,7 +12,7 @@ import Comment from './comment'
 
 let timer: NodeJS.Timeout
 
-const MainBoard = ({ boardId }: { boardId: number }) => {
+const MainBoard = (boardDatas: boardFetchDataTypes) => {
   const { loginStatus } = useSelector(
     (state: RootState) => state.loginStatusSlice,
   )
@@ -35,14 +36,19 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
   const commentInputRef = useRef<HTMLInputElement>(null)
 
   // 현재 fetch해 온 댓글 리스트 및 내가 코멘트를 달았는지 확인하기 위한 SetState
-  const { commentsInView, setCommentDetection } = useCommentInView(boardId)
+  const { commentsInView, setCommentDetection } = useCommentInView(
+    boardDatas.content.id,
+  )
 
   const handleAddComment = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
       if (!handleNotLoginExecption(loginStatus)) return
 
       event.preventDefault()
-      const result = await postComment({ boardId, myInputComment })
+      const result = await postComment({
+        boardId: boardDatas.content.id,
+        myInputComment,
+      })
 
       if (commentInputRef.current) commentInputRef.current.value = ''
 
@@ -56,9 +62,10 @@ const MainBoard = ({ boardId }: { boardId: number }) => {
     <>
       <div className="bodyContainer">
         <Body
-          title={'임시제목입니다임시제목입니다임시제목입니다'}
-          content={'임시내용'}
-          creatorNickname={'익명'}
+          title={boardDatas.content.roomTitle}
+          content={boardDatas.content.roomContent}
+          creatorNickname={boardDatas.content.creatorNickname}
+          createTime={boardDatas.content.createdTime}
         ></Body>
       </div>
 
