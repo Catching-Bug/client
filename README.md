@@ -40,8 +40,8 @@
 
 # 💼 폴더 구조
 ```bash
-─ src <br>
-   ├── __mock__ (for useSelector, useDispatch, API mocking) <br>
+─ src
+   ├── __mock__ (for useSelector, useDispatch, API mocking) 
    ├── __test__ (for pages)
    ├── components
    │    ├── layout
